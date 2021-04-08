@@ -20,15 +20,6 @@ import Colors from "../constants/Colors";
 import MessagesScreen from "../screens/MessagesScreen";
 import MenuScreen from "../screens/MenuScreen";
 
-/*
-const ClubsNavigator = createStackNavigator({
-        Clubs: ClubsScreen,
-        Discovery: DiscoveryScreen,
-        Messages: MessagesScreen,
-        Menu: MenuScreen
-    }
-)
-*/
 const tabScreenConfig = {
     Clubs: {
         screen: ClubsScreen, navigationOptions: {
@@ -70,11 +61,11 @@ const tabScreenConfig = {
 
 const ClubsTabNavigator = Platform.OS === 'android'
     ? createMaterialBottomTabNavigator(tabScreenConfig, {
-            activeTintColor: 'white',
-            shifting: true,
-            barStyle: {
-                backgroundColor: Colors.primaryColor
-            }
+        activeTintColor: 'white',
+        shifting: true,
+        barStyle: {
+            backgroundColor: Colors.primaryColor
+        }
         }
     )
     : createBottomTabNavigator(

@@ -4,27 +4,26 @@ import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import CustomHeaderButton from "../components/CustomHeaderButton";
 import Colors from "../constants/Colors";
 
-const ClubsScreen = props => {
+const ClubsEventScreen = props => {
     return (
         <View style={styles.text}>
             <Text>
-                This is the clubs screen
+                This is the Events screen
+                <Button title="Event Details" onPress={() => {props.navigation.navigate({
+                    routeName: 'EventDetails'
+                })}}/>
             </Text>
-            <Button
-                title="Events"
-                onPress={ () => {
-                    props.navigation.navigate('ClubEvent')}}/>
         </View>
     )
 }
 
-ClubsScreen.navigationOptions = navData => {
+ClubsEventScreen.navigationOptions = navData => {
     return {
         headerStyle: {
-            backgroundColor: Colors.accentColor
+            backgroundColor: Colors.primaryColor
         },
-        headerTitle: 'Club',
-        headerLeft: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        headerTitle: 'Events',
+        headerRight: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
             <Item
                 title='Clubs'
                 iconName={'ios-menu'}
@@ -37,11 +36,10 @@ ClubsScreen.navigationOptions = navData => {
 
 const styles = StyleSheet.create({
         text: {
-            flexDirection: 'column',
             marginTop: 50,
             alignItems: 'center'
         }
     }
 )
 
-export default ClubsScreen;
+export default ClubsEventScreen;

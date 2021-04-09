@@ -1,7 +1,5 @@
 import React from 'react';
-import {View, Text, Button, StyleSheet, Platform} from 'react-native'
-import {HeaderButtons, Item} from "react-navigation-header-buttons";
-import CustomHeaderButton from "../components/CustomHeaderButton";
+import {View, Text, StyleSheet} from 'react-native'
 import Colors from "../constants/Colors";
 
 const EventDetailsScreen = props => {

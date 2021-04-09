@@ -9,10 +9,13 @@ const ClubsEventScreen = props => {
         <View style={styles.text}>
             <Text>
                 This is the Events screen
-                <Button title="Event Details" onPress={() => {props.navigation.navigate({
-                    routeName: 'EventDetails'
-                })}}/>
+
             </Text>
+            <Button title="Event Details" onPress={() => {
+                props.navigation.navigate({
+                    routeName: 'EventDetails'
+                })
+            }}/>
         </View>
     )
 }

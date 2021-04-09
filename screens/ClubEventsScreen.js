@@ -23,7 +23,7 @@ const ClubsEventScreen = props => {
 ClubsEventScreen.navigationOptions = navData => {
     return {
         headerStyle: {
-            backgroundColor: Colors.primaryColor
+            backgroundColor: Colors.accentColor
         },
         headerTitle: 'Events',
         headerRight: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>

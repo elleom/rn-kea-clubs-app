@@ -17,7 +17,7 @@ const EventDetailsScreen = props => {
 EventDetailsScreen.navigationOptions = navData => {
     return {
         headerStyle: {
-            backgroundColor: Colors.primaryColor
+            backgroundColor: Colors.accentColor
         },
         headerTitle: 'Event Details'
     }

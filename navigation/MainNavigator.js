@@ -2,11 +2,10 @@ import React from 'react';
 import {Platform} from 'react-native'
 import {SimpleLineIcons} from "@expo/vector-icons";
 import {Ionicons} from "@expo/vector-icons";
-import {createStackNavigator} from "@react-navigation/stack";
 
 //navigation imports
 import {createAppContainer} from 'react-navigation'
-//import {createStackNavigator} from 'react-navigation-stack';
+import {createStackNavigator} from 'react-navigation-stack';
 //import {createDrawerNavigator} from "react-navigation-drawer";
 import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom-tabs";
 import {createBottomTabNavigator} from 'react-navigation-tabs';
@@ -19,10 +18,34 @@ import DiscoveryScreen from "../screens/DiscoveryScreen";
 import Colors from "../constants/Colors";
 import MessagesScreen from "../screens/MessagesScreen";
 import MenuScreen from "../screens/MenuScreen";
+import ClubEventsScreen from "../screens/ClubEventsScreen";
+import EventDetailsScreen from "../screens/EventDetailsScreen";
+
+
+const defaultStackNavOptions = {
+    headerStyle: {
+        backgroundColor: Platform.OS === 'android' ? Colors.accentColor : '' //if none described then default
+    },
+    headerTitleStyle: {
+
+    }, headerBackTitleStyle: {
+
+    },
+    headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor
+}
+
+const ClubsStackNavigator = createStackNavigator({
+    Clubs: ClubsScreen, // short form, no option specifications
+    ClubEvent: ClubEventsScreen,
+    EventDetails: EventDetailsScreen
+}, {
+    defaultNavigationOptions: defaultStackNavOptions
+
+});
 
 const tabScreenConfig = {
     Clubs: {
-        screen: ClubsScreen, navigationOptions: {
+        screen: ClubsStackNavigator, navigationOptions: {
             tabBarIcon: (tabInfo) => {
                 return (<SimpleLineIcons name='people' size={25} color={tabInfo.tintColor}/>)
             },
@@ -74,6 +97,8 @@ const ClubsTabNavigator = Platform.OS === 'android'
             tabScreenConfig
         }, {
             tabBarOptions: {
+                activeBackgroundColor: Colors.primaryColor,
+                inactiveBackgroundColor: Colors.accentColor,
                 labelStyle: {
                     fontFamily: 'open-sans-bold'
                 },
@@ -81,6 +106,7 @@ const ClubsTabNavigator = Platform.OS === 'android'
             }
         }
     )
+
 
 
 export default createAppContainer(ClubsTabNavigator); //nested navigators pattern

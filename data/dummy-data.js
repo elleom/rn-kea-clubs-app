@@ -2,6 +2,7 @@
 import ChatMessage from "../models/ChatMessage";
 import ChatRoom from "../models/ChatRoom";
 import User from "../models/User";
+import Event from "../models/Event";
 
 export const USERS = [
     new User('1','Felix Sandgren', '1234', 'felix@sandgren.dk', '', 'MSc in Medicine', true),
@@ -19,4 +20,10 @@ export const CHATROOM = [
     new ChatRoom('1',new Date(2021, 0, 1, 2, 0, 0), 'CBS Surf', CHATMESSAGES),
     new ChatRoom('2',new Date(2021, 0, 1, 2, 1, 0), 'CBS Students', []),
     new ChatRoom('3',new Date(2021, 0, 1, 2, 2, 0), 'CBS Poker', [])
+];
+
+export const EVENTS = [
+  new Event('1', 'A movie', 'Something to see', new Date( 2021, 12,13,5,30 )),
+  new Event('2', 'UCL', 'Go city!', new Date( 2021, 12,13,5,30 )),
+  new Event('3', 'Paintball', 'The description here ', new Date( 2021, 12,13,5,30 ))
 ];

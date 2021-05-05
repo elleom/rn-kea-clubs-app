@@ -1,20 +1,34 @@
 import React from 'react';
-import {View, Text, Button, StyleSheet, Platform} from 'react-native'
+import {View, Text, Button, StyleSheet, Platform, FlatList} from 'react-native'
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import CustomHeaderButton from "../components/CustomHeaderButton";
 import Colors from "../constants/Colors";
+import EventItem from "../components/EventItem";
+import {EVENTS} from "../data/dummy-data";
 
 const ClubsScreen = props => {
+
+    const renderEventItem = eventItemData => {
+        return (
+            <EventItem
+                title={eventItemData.item.title}
+                description={eventItemData.item.description}
+                date={eventItemData.item.date}
+                image={eventItemData.item.image}
+                onSelect={() => { props.navigation.navigate('ClubEvent')
+                }} //todo create navigate
+            />
+        )
+    }
+
+
     return (
-        <View style={styles.text}>
-            <Text>
-                This is the clubs screen
-            </Text>
-            <Button
-                title="Events"
-                onPress={ () => {
-                    props.navigation.navigate('ClubEvent')}}/>
-        </View>
+
+        <FlatList
+            keyExtractor={(item => item.id)}
+            data={EVENTS} renderItem={renderEventItem}/>
+
+
     )
 }
 

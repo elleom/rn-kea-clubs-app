@@ -23,7 +23,7 @@ export const CHATROOM = [
 ];
 
 export const EVENTS = [
-  new Event('1', 'A movie', 'Something to see', new Date( 2021, 12,13,5,30 )),
-  new Event('2', 'UCL', 'Go city!', new Date( 2021, 12,13,5,30 )),
-  new Event('3', 'Paintball', 'The description here ', new Date( 2021, 12,13,5,30 ))
+  new Event('1', 'Event', 'A movie', 'Something to see', 'img.png', new Date( 2021, 12,13,5,30 )),
+  new Event('2', 'Event','UCL', 'Go city!', 'img.png',new Date( 2021, 12,13,5,30 )),
+  new Event('3', 'Event','Paintball', 'The description here ','img.png', new Date( 2021, 12,13,5,30 ))
 ];

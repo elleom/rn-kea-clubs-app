@@ -15,7 +15,8 @@ const ClubsScreen = props => {
                 description={eventItemData.item.description}
                 date={eventItemData.item.date}
                 image={eventItemData.item.image}
-                onSelect={() => { props.navigation.navigate('ClubEvent')
+                onSelect={() => {
+                    props.navigation.navigate('ClubEvent')
                 }} //todo create navigate
             />
         )
@@ -23,12 +24,14 @@ const ClubsScreen = props => {
 
 
     return (
-
-        <FlatList
-            keyExtractor={(item => item.id)}
-            data={EVENTS} renderItem={renderEventItem}/>
-
-
+        <View style={styles.screen}>
+            <FlatList
+                keyExtractor={(item => item.id)}
+                data={EVENTS} keyExtractor={(item, index) => item.id}
+                renderItem={renderEventItem}
+                style={{width: '100%'}}
+            />
+        </View>
     )
 }
 
@@ -50,10 +53,11 @@ ClubsScreen.navigationOptions = navData => {
 }
 
 const styles = StyleSheet.create({
-        text: {
-            flexDirection: 'column',
-            marginTop: 50,
-            alignItems: 'center'
+        screen: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: 15
         }
     }
 )

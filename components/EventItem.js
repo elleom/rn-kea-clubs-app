@@ -7,16 +7,14 @@ const EventItem = props => {
         <View style={styles.eventItem}>
             <TouchableOpacity>
                 <View>
-                    <LinearGradient style={styles.linearGradient} colors={['#a81010', '#FFFFFF']}>
-                        <ImageBackground
-                            source={{uri: props.image}}
-                            style={styles.bgImage}>
-                            <Text>{props.title}</Text>
-                            <Text>{props.description}</Text>
-                            <Text>{props.date}</Text>
-                            <Text>{props.title}</Text>
-                        </ImageBackground>
-                    </LinearGradient>
+                    <ImageBackground
+                        source={{uri: props.image}}
+                        style={styles.bgImage}>
+                        <LinearGradient //insert veneer on top if image => left to right lighter to darker - opacity
+                            colors={['rgba(0,0,0,0.05)', 'rgba(7,6,6,0.45)', 'rgba(0,0,0,0.76)']}
+                            style={styles.linearGradient}/>
+                        <Text>{props.title}</Text>
+                    </ImageBackground>
                 </View>
             </TouchableOpacity>
         </View>
@@ -38,12 +36,11 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
     },
     linearGradient: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 5,
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
         height: '100%'
-        ,
-        width: 350,
     }
 })
 

@@ -1,19 +1,22 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, ImageBackground} from "react-native";
+import {LinearGradient} from 'expo-linear-gradient';
 
 const EventItem = props => {
     return (
         <View style={styles.eventItem}>
             <TouchableOpacity>
                 <View>
-                    <ImageBackground
-                        source={{uri: props.image}}
-                        style={styles.bgImage}                    >
-                        <Text>{props.title}</Text>
-                        <Text>{props.description}</Text>
-                        <Text>{props.date}</Text>
-                        <Text>{props.title}</Text>
-                    </ImageBackground>
+                    <LinearGradient style={styles.linearGradient} colors={['#a81010', '#FFFFFF']}>
+                        <ImageBackground
+                            source={{uri: props.image}}
+                            style={styles.bgImage}>
+                            <Text>{props.title}</Text>
+                            <Text>{props.description}</Text>
+                            <Text>{props.date}</Text>
+                            <Text>{props.title}</Text>
+                        </ImageBackground>
+                    </LinearGradient>
                 </View>
             </TouchableOpacity>
         </View>
@@ -33,6 +36,14 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         justifyContent: 'flex-end',
+    },
+    linearGradient: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 5,
+        height: '100%'
+        ,
+        width: 350,
     }
 })
 

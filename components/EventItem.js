@@ -16,14 +16,14 @@ const EventItem = props => {
                             style={styles.linearGradient}/>
                         <View style={styles.container}>
                             <Text style={styles.title}>{props.title}</Text>
-                            <Text style={styles.description}>{props.description}</Text>
-                            <View style={styles.location}>
+                            <Text style={styles.organizationName}>{props.organization}</Text>
+                            <View style={styles.locationContainer}>
                                 <Ionicons name="md-location-sharp" size={20} color="white" />
-                                <Text style={styles.detailsText}>Here goes the location</Text>
+                                <Text style={styles.detailsText}>{props.location}</Text>
                             </View>
-                            <View style={styles.location}>
+                            <View style={styles.locationContainer}>
                                 <Ionicons name="time" size={20} color="white" />
-                                <Text style={styles.detailsText}>Here goes time</Text>
+                                <Text style={styles.detailsText}>{props.startDate}</Text>
                             </View>
                         </View>
 
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         marginVertical: 5,
     },
-    location: {
+    locationContainer: {
         marginLeft: 10,
         flexDirection: 'row',
 
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     title: {
-        fontFamily: 'oxanium-regular',
+        fontFamily: 'oxanium-bold',
         color: 'white',
         fontSize: 24,
         marginLeft: 10
@@ -77,9 +77,9 @@ const styles = StyleSheet.create({
     container: {
         marginBottom: 10,
     },
-    description: {
+    organizationName: {
         marginLeft: 10,
-        fontFamily: 'oxanium-light',
+        fontFamily: 'oxanium-regular',
         color: 'white',
         fontSize: 14,
 

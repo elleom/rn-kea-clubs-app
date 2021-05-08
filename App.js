@@ -11,7 +11,8 @@ const fetchFont = () => {
         Font.loadAsync(
             {
                 'oxanium-regular': require('./assets/fonts/Oxanium-Regular.ttf'),
-                'oxanium-light': require('./assets/fonts/Oxanium-Light.ttf')
+                'oxanium-light': require('./assets/fonts/Oxanium-Light.ttf'),
+                'oxanium-bold': require('./assets/fonts/Oxanium-Bold.ttf'),
             }
         )
     )

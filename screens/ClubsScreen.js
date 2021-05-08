@@ -11,10 +11,15 @@ const ClubsScreen = props => {
     const renderEventItem = eventItemData => {
         return (
             <EventItem
+                id={eventItemData.item.id}
+                type={eventItemData.item.type}
                 title={eventItemData.item.title}
                 description={eventItemData.item.description}
-                date={eventItemData.item.date}
                 image={eventItemData.item.image}
+                startDate={eventItemData.item.startDate}
+                endDate={eventItemData.item.endDate}
+                location={eventItemData.item.location}
+                organization={eventItemData.item.organization}
                 onSelect={() => {
                     props.navigation.navigate('ClubEvent')
                 }} //todo create navigate

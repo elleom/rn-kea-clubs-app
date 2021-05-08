@@ -1,6 +1,6 @@
 class Event {
     constructor(id, type, title, description, image, startDate, endDate,
-    location, organisation, thumbnail) {
+    location, organization, thumbnail) {
         this.id = id;
         this.type = type;
         this.title = title;
@@ -9,7 +9,7 @@ class Event {
         this.startDate = startDate;
         this.endDate = endDate;
         this.location = location;
-        this.organisation = organisation;
+        this.organization = organization;
         this.thumbnail = thumbnail;
     }
 }

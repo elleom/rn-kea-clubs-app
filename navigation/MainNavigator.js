@@ -10,16 +10,21 @@ import {createStackNavigator} from 'react-navigation-stack';
 import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom-tabs";
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 
+
+
 //screens
 import ClubsScreen from '../screens/ClubsScreen'
 import DiscoveryScreen from "../screens/DiscoveryScreen";
+import MessagesScreen from "../screens/MessagesScreen";
+import MenuScreen from "../screens/MenuScreen";
+
+import ClubEventsScreen from "../screens/ClubEventsScreen";
+import EventDetailsScreen from "../screens/EventDetailsScreen";
+import ChatMessagesScreen from '../screens/ChatMessagesScreen';
 
 //own imports
 import Colors from "../constants/Colors";
-import MessagesScreen from "../screens/MessagesScreen";
-import MenuScreen from "../screens/MenuScreen";
-import ClubEventsScreen from "../screens/ClubEventsScreen";
-import EventDetailsScreen from "../screens/EventDetailsScreen";
+
 
 
 const defaultStackNavOptions = {
@@ -32,6 +37,7 @@ const defaultStackNavOptions = {
 
     },
     headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor
+    
 }
 
 const ClubsStackNavigator = createStackNavigator({
@@ -39,15 +45,24 @@ const ClubsStackNavigator = createStackNavigator({
     ClubEvent: ClubEventsScreen,
     EventDetails: EventDetailsScreen
 }, {
+    
     defaultNavigationOptions: defaultStackNavOptions
 
 });
 
+const MessagesStackNavigator = createStackNavigator({
+    Messages : MessagesScreen,
+    ChatMessages : ChatMessagesScreen
+},{
+    defaultNavigationOptions: defaultStackNavOptions
+});
+
 const tabScreenConfig = {
     Clubs: {
-        screen: ClubsStackNavigator, navigationOptions: {
+        screen: ClubsStackNavigator,  navigationOptions: {
             tabBarIcon: (tabInfo) => {
-                return (<SimpleLineIcons name='people' size={25} color={tabInfo.tintColor}/>)
+                return(<SimpleLineIcons name='people' size={25} color={tabInfo.tintColor}/>) 
+                 
             },
             tabBarColor: Colors.primaryColor,
             tabBarLabel: 'Clubs'
@@ -63,7 +78,7 @@ const tabScreenConfig = {
         }
     },
     Messages: {
-        screen: MessagesScreen, navigationOptions: {
+        screen: MessagesStackNavigator, navigationOptions: {
             tabBarIcon: (tabInfo) => {
                 return (<Ionicons name='md-chatbubble-outline' size={25} color={tabInfo.tintColor}/>)
             },
@@ -91,10 +106,14 @@ const ClubsTabNavigator = Platform.OS === 'android'
         }
         }
     )
-    : createBottomTabNavigator(
+    : createBottomTabNavigator(tabScreenConfig,
         { // need specification over the
             //set identifier + object
-            tabScreenConfig
+            activeTintColor: 'white',
+        shifting: true,
+        barStyle: {
+            backgroundColor: Colors.primaryColor
+        }
         }, {
             tabBarOptions: {
                 activeBackgroundColor: Colors.primaryColor,

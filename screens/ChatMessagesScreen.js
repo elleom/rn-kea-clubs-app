@@ -3,6 +3,9 @@ import { View, Button, StyleSheet, FlatList, TextInput, Image } from 'react-nati
 import { useSelector, useDispatch } from 'react-redux'
 import { addToTest, addToChats } from './../store/ChatActions'
 
+//import  { ChatRoomRef }  from "./../firebase/firebaseConfig";
+
+
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 
 //own imports
@@ -15,8 +18,6 @@ const ChatMessagesScreen = (props) => {
     const  id  = props.navigation.state.params.id;
    
     const [value, onChangeText] = useState('Write message');
-
-    console.log()
 
     const chatMessages = useSelector(state => state.chat.chatrooms).find(room => room.id === id).chatMessages;
    

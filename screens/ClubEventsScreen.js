@@ -7,23 +7,10 @@ import EventItem from "../components/EventItem";
 import {EVENTS} from "../data/dummy-data";
 
 const ClubsEventScreen = props => {
-
-    const renderEventItem = eventItemData => {
-        return (
-            <EventItem
-                title={eventItemData.item.title}
-                description={eventItemData.item.description}
-                date={eventItemData.item.date}
-                onSelect={() => {
-                }} //todo create navigate
-            />
-        )
-    }
-
     return (
-        <FlatList
-            keyExtractor={(item => item.id)}
-            data={EVENTS} renderItem={renderEventItem}/>
+        <View>
+            <Text>Something</Text>
+        </View>
     )
 }
 

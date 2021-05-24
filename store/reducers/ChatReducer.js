@@ -1,6 +1,17 @@
 import { ADD_TO_TEST, TOGGLE_HAPPY, NEW_CHATMESSAGE, DELETE_MESSAGE } from './../ChatActions';
 // import from dummy data to access chat
 import { CHATROOM } from '../../data/dummy-data';
+import { getChatRooms } from '../../firebase/api/getChatRooms'
+
+/*
+const initialState = {
+    happy: false,
+    test: ['Hi', 'There'],
+    chatrooms: CHATROOM,
+    //...
+}
+
+*/
 
 const initialState = {
     happy: false,

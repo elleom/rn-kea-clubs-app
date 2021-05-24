@@ -1,4 +1,3 @@
-import {StatusBar} from 'expo-status-bar';
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import MainNavigator from "./navigation/MainNavigator";
@@ -19,14 +18,13 @@ const fetchFont = () => {
 
 }
 
-import { Provider } from 'react-redux';
-import ReduxThunk from 'redux-thunk';
-import ChatReducer from './store/reducers/ChatReducer';
-import { combineReducers, createStore, applyMiddleware } from 'redux';
-
+import { Provider } from "react-redux";
+import ReduxThunk from "redux-thunk";
+import ChatReducer from "./store/reducers/ChatReducer";
+import { combineReducers, createStore, applyMiddleware } from "redux";
 
 const rootReducer = combineReducers({
-  chat: ChatReducer
+  chat: ChatReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

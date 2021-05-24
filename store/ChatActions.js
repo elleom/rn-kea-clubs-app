@@ -5,6 +5,10 @@ export const TOGGLE_HAPPY = 'TOGGLE_HAPPY';
 export const ADD_TO_TEST = 'ADD_TO_TEST';
 export const NEW_CHATMESSAGE = 'NEW_CHATMESSAGE';
 
+import {firebase}  from "./../firebase/firebaseConfig";
+import 'firebase/firestore'
+import 'firebase/database'
+
 export const toggleHappy = (happy) => {
     return {type: TOGGLE_HAPPY, payload: happy};
 };
@@ -20,4 +24,15 @@ export const addToChats = (text, chatroomId) => {
 
     return {type: NEW_CHATMESSAGE, payload: {message, chatroomId }};
 };
+
+export const fetchMessages = (userId) => {
+
+    firebase.database()
+        .ref('ChatRooms/ChatMessages')
+        .on('value', (snapshot) =>{
+
+        })
+
+        return {type: NEW_FIREBASE_CHATMESSAGE, payload: {message, chatroomId }}; 
+}
 

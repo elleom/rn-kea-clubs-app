@@ -3,7 +3,6 @@ import {View, Text, Button, StyleSheet, Platform, FlatList, TouchableOpacity} fr
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import CustomHeaderButton from "../components/CustomHeaderButton";
 import Colors from "../constants/Colors";
-import EventItem from "../components/EventItem";
 import {EVENTS} from "../data/dummy-data";
 
 const ClubsEventScreen = props => {

@@ -1,6 +1,6 @@
 import {StatusBar} from 'expo-status-bar';
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import MainNavigator from "./navigation/MainNavigator";
 import * as Font from 'expo-font';
 import AppLoading from "expo-app-loading";

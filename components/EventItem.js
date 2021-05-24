@@ -6,7 +6,7 @@ import {Ionicons} from "@expo/vector-icons";
 const EventItem = props => {
     return (
         <View style={styles.eventItem}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={props.onSelect}>
                 <View >
                     <ImageBackground
                         source={{uri: props.image}}

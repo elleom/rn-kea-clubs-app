@@ -21,8 +21,13 @@ const ClubsScreen = props => {
                 location={eventItemData.item.location}
                 organization={eventItemData.item.organization}
                 onSelect={() => {
-                    props.navigation.navigate('ClubEvent')
-                }} //todo create navigate
+                    props.navigation.navigate({
+                        routeName: 'ClubEvent',
+                        params: {
+                            eventId: eventItemData.item.id
+                        }
+                    })
+                }}
             />
         )
     }
@@ -45,7 +50,8 @@ ClubsScreen.navigationOptions = navData => {
         headerStyle: {
             backgroundColor: Colors.accentColor
         },
-        headerTitle: 'Club',
+        headerTitle: 'Events',
+        /*
         headerLeft: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
             <Item
                 title='Clubs'
@@ -53,7 +59,7 @@ ClubsScreen.navigationOptions = navData => {
                 onPress={() => {
 
                 }}/>
-        </HeaderButtons>
+        </HeaderButtons>*/
     }
 }
 

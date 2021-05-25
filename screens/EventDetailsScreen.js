@@ -62,6 +62,27 @@ const EventDetailsScreen = props => {
                                      options={["Interested", "Going", 'Not Going', "Cancel"]}
                         />
                     </View>
+                    <View style={styles.eventCounterContainer}>
+                        <View style={styles.peopleCounter}>
+                            <Ionicons name="star" size={25} color={Colors.primaryColor}/>
+                            <Text>145 Interested</Text>
+                        </View>
+                        <View style={styles.peopleCounter}>
+                            <Ionicons name="people" size={25} color={Colors.primaryColor}/>
+                            <Text>35 Going</Text>
+                        </View>
+                    </View>
+                    <View style={styles.detailsContainer}>
+                        <Text style={styles.descriptionText}>"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                            commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+                            anim id est laborum."</Text>
+                    </View>
+
                 </View>
             </View>
         </ScrollView>
@@ -165,6 +186,27 @@ const styles = StyleSheet.create({
             fontFamily: 'oxanium-bold',
             color: 'white',
             fontSize: 16,
+        },
+        eventCounterContainer: {
+            marginTop: 5,
+            flexDirection: 'row',
+            justifyContent: 'space-around'
+        },
+        peopleCounter: {
+            flexDirection: 'row',
+            alignItems: 'center',
+        },
+        detailsContainer: {
+            margin: 10,
+            borderWidth: 1,
+            borderColor: 'grey',
+            borderRadius: 15,
+            padding: 10
+        },
+        descriptionText: {
+            fontFamily: 'oxanium-bold',
+            color: 'grey',
+            fontSize: 14,
         }
     }
 )

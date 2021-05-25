@@ -3,11 +3,10 @@ import "firebase/firestore";
 import "firebase/database";
 
 const getChatRooms = async () => {
-  chatRoomIdArray = [8754655, 1234444];
+  chatRoomIdArray = [1];
 
   chatRoomIdArray.forEach((chatRoomId) => {
-    const chatRoomRef = firebase.database().ref("CBSDatabase/ChatRooms");
-    //.equalTo(chatRoomId);
+    const chatRoomRef = firebase.database().ref("CBSDatabase/ObjChatRooms");
 
     chatRoomRef
       .once("value")

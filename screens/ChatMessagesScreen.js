@@ -25,11 +25,17 @@ const ChatMessagesScreen = (props) => {
   const [value, onChangeText] = useState("Write message");
 
 
+
+
   const chatMessages = useSelector((state) => state.chat.chatrooms).find(
     (room) => room.id === id
   ).chatMessages;
 
-  //console.log(chatMessages)
+  /**
+   * 
+   * console.log("dummy data: ");
+  console.log(chatMessages)
+   */
 
   const handleSend = () => {
     console.log("value " + value);

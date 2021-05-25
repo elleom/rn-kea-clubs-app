@@ -22,9 +22,10 @@ const ClubsScreen = props => {
                 organization={eventItemData.item.organization}
                 onSelect={() => {
                     props.navigation.navigate({
-                        routeName: 'ClubEvent',
+                        routeName: 'EventDetails',
                         params: {
-                            eventId: eventItemData.item.id
+                            eventId: eventItemData.item.id,
+                            eventName: eventItemData.item.title
                         }
                     })
                 }}

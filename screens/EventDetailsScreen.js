@@ -3,11 +3,13 @@ import {View, Text, StyleSheet, Image, ScrollView, TouchableOpacity} from 'react
 import Colors from "../constants/Colors";
 import {EVENTS} from "../data/dummy-data";
 import {Ionicons} from "@expo/vector-icons";
+import OptionsMenu from "react-native-option-menu";
 
 const EventDetailsScreen = props => {
 
     const eventId = props.navigation.getParam('eventId')
     const selectedEvent = EVENTS.find(event => event.id === eventId);
+    const MoreIcon = require("../assets/icon.png");
 
 
     return (
@@ -37,14 +39,29 @@ const EventDetailsScreen = props => {
                         <Ionicons name="md-location-sharp" size={20} color="black"/>
                         <Text style={styles.detailsText}>{selectedEvent.location}</Text>
                     </View>
-                    <TouchableOpacity style={styles.placeholderContainer}>
-                        <Image style={styles.placeholder}
-                               source={{uri: 'https://kea.dk/images/DA/Presse/Downloads/KEA_logo_DK_Web.jpg'}}/>
-                        <View style={styles.clubTitleContainer}>
-                            <Text style={styles.clubTitle}>{selectedEvent.organization}</Text>
-                            <Text style={styles.clubSubTitle}>View Page</Text>
-                        </View>
-                    </TouchableOpacity>
+                    <View style={styles.clubInfo}>
+                        <TouchableOpacity style={styles.placeholderContainer}>
+                            <Image style={styles.placeholder}
+                                   source={{uri: 'https://kea.dk/images/DA/Presse/Downloads/KEA_logo_DK_Web.jpg'}}/>
+                            <View style={styles.clubTitleContainer}>
+                                <Text style={styles.clubTitle}>{selectedEvent.organization}</Text>
+                                <Text style={styles.clubSubTitle}>View Page</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => {
+                        }}>
+                            <Ionicons name="chatbubbles-outline" size={40} color={Colors.accentColor}/>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.optionsContainer}>
+                        <Text style={styles.optionsText}>INTERESTED</Text>
+                        <OptionsMenu style={styles.options}
+                                     button={MoreIcon}
+                                     buttonStyle={{width: 32, height: 8, margin: 7.5, resizeMode: "contain"}}
+                                     destructiveIndex={1}
+                                     options={["Interested", "Going", 'Not Going', "Cancel"]}
+                        />
+                    </View>
                 </View>
             </View>
         </ScrollView>
@@ -76,12 +93,7 @@ const styles = StyleSheet.create({
             height: 40,
         },
         placeholderContainer: {
-            margin: 15,
-            padding: 10,
-            flexDirection: 'row',
-            borderWidth: 1,
-            borderRadius: 15,
-            borderColor: '#8b8585'
+            flexDirection: 'row'
         },
         timeContainer: {
             marginLeft: 15,
@@ -106,12 +118,12 @@ const styles = StyleSheet.create({
         clubTitle: {
             fontFamily: 'oxanium-bold',
             color: 'black',
-            fontSize: 16,
+            fontSize: 14,
         },
         clubSubTitle: {
             fontFamily: 'oxanium-bold',
             color: 'grey',
-            fontSize: 14,
+            fontSize: 12,
         },
         image: {
             width: '100%',
@@ -123,6 +135,36 @@ const styles = StyleSheet.create({
         clubTitleContainer: {
             flexDirection: 'column',
             marginLeft: 10
+        },
+        clubInfo: {
+            margin: 15,
+            padding: 10,
+            flexDirection: 'row',
+            borderWidth: 1,
+            borderRadius: 15,
+            borderColor: '#8b8585',
+            justifyContent: 'space-between'
+        },
+        optionsContainer: {
+            marginLeft: 15,
+            marginRight: 15,
+            padding: 10,
+            flexDirection: 'row',
+            borderWidth: 1,
+            borderRadius: 15,
+            borderColor: '#8b8585',
+            justifyContent: 'space-between',
+            backgroundColor: Colors.accentColor
+        },
+        options: {
+            width: '100%',
+            height: '100%',
+
+        },
+        optionsText: {
+            fontFamily: 'oxanium-bold',
+            color: 'white',
+            fontSize: 16,
         }
     }
 )

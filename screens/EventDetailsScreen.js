@@ -32,12 +32,19 @@ const EventDetailsScreen = props => {
                                 + selectedEvent.endDate.slice(15, 21)
                             }</Text>
                         </View>
-
                     </View>
-
                     <View style={styles.locationContainer}>
                         <Ionicons name="md-location-sharp" size={20} color="black"/>
                         <Text style={styles.detailsText}>{selectedEvent.location}</Text>
+                    </View>
+                    <View style={styles.placeholderContainer}>
+                        <Image style={styles.placeholder}
+                               source={{uri: 'https://kea.dk/images/DA/Presse/Downloads/KEA_logo_DK_Web.jpg'}}/>
+                        <View style={styles.clubTitleContainer}>
+                            <Text style={styles.clubTitle}>{selectedEvent.organization}</Text>
+                            <Text style={styles.clubSubTitle}>View Page</Text>
+                        </View>
+
                     </View>
                 </View>
             </View>
@@ -65,6 +72,15 @@ const styles = StyleSheet.create({
             flexDirection: 'row',
 
         },
+        placeholder: {
+            width: 80,
+            height: 40,
+        },
+        placeholderContainer: {
+            margin: 15,
+            padding: 5,
+            flexDirection: 'row'
+        },
         timeContainer: {
             marginLeft: 15,
             flexDirection: 'row',
@@ -85,16 +101,26 @@ const styles = StyleSheet.create({
             marginBottom: 15,
 
         },
+        clubTitle: {
+            fontFamily: 'oxanium-bold',
+            color: 'black',
+            fontSize: 16,
+        },
+        clubSubTitle: {
+            fontFamily: 'oxanium-bold',
+            color: 'grey',
+            fontSize: 14,
+        },
         image: {
             width: '100%',
             height: 200
         },
-        tinyLogo: {
-            width: 100,
-            height: 100,
-        },
         main: {
             width: '100%',
+        },
+        clubTitleContainer: {
+            flexDirection: 'column',
+            marginLeft: 10
         }
     }
 )

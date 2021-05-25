@@ -77,8 +77,11 @@ const styles = StyleSheet.create({
         },
         placeholderContainer: {
             margin: 15,
-            padding: 5,
-            flexDirection: 'row'
+            padding: 10,
+            flexDirection: 'row',
+            borderWidth: 1,
+            borderRadius: 15,
+            borderColor: '#8b8585'
         },
         timeContainer: {
             marginLeft: 15,

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, ScrollView} from 'react-native'
+import {View, Text, StyleSheet, Image, ScrollView, TouchableOpacity} from 'react-native'
 import Colors from "../constants/Colors";
 import {EVENTS} from "../data/dummy-data";
 import {Ionicons} from "@expo/vector-icons";
@@ -37,15 +37,14 @@ const EventDetailsScreen = props => {
                         <Ionicons name="md-location-sharp" size={20} color="black"/>
                         <Text style={styles.detailsText}>{selectedEvent.location}</Text>
                     </View>
-                    <View style={styles.placeholderContainer}>
+                    <TouchableOpacity style={styles.placeholderContainer}>
                         <Image style={styles.placeholder}
                                source={{uri: 'https://kea.dk/images/DA/Presse/Downloads/KEA_logo_DK_Web.jpg'}}/>
                         <View style={styles.clubTitleContainer}>
                             <Text style={styles.clubTitle}>{selectedEvent.organization}</Text>
                             <Text style={styles.clubSubTitle}>View Page</Text>
                         </View>
-
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </View>
         </ScrollView>

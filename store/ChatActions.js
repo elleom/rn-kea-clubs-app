@@ -1,38 +1,51 @@
-import User from './../models/User';
-import ChatMessage from './../models/ChatMessage';
+import User from "./../models/User";
+import ChatMessage from "./../models/ChatMessage";
 
-export const TOGGLE_HAPPY = 'TOGGLE_HAPPY';
-export const ADD_TO_TEST = 'ADD_TO_TEST';
-export const NEW_CHATMESSAGE = 'NEW_CHATMESSAGE';
+import { firebase } from "./../firebase/firebaseConfig";
+import "firebase/firestore";
+import "firebase/database";
 
-import {firebase}  from "./../firebase/firebaseConfig";
-import 'firebase/firestore'
-import 'firebase/database'
+export const TOGGLE_HAPPY = "TOGGLE_HAPPY";
+export const ADD_TO_TEST = "ADD_TO_TEST";
+export const NEW_CHATMESSAGE = "NEW_CHATMESSAGE";
+export const GET_FIREBASE_CHATROOMS = "GET_FIREBASE_CHATROOMS";
+
+
 
 export const toggleHappy = (happy) => {
-    return {type: TOGGLE_HAPPY, payload: happy};
+  return { type: TOGGLE_HAPPY, payload: happy };
 };
 
 export const addToTest = (text) => {
-    console.log("text " + text);
-    return {type: ADD_TO_TEST, payload: text};
+  console.log("text " + text);
+  return { type: ADD_TO_TEST, payload: text };
 };
 
 export const addToChats = (text, chatroomId) => {
-    const tempUser = new User('1','Felix Sandgren', '1234', 'felix@sandgren.dk', '', 'MSc in Medicine', true);
-    const message = new ChatMessage(Math.random().toString(), new Date(), text, tempUser);
+  const tempUser = new User(
+    "1",
+    "Felix Sandgren",
+    "1234",
+    "felix@sandgren.dk",
+    "",
+    "MSc in Medicine",
+    true
+  );
+  const message = new ChatMessage(
+    Math.random().toString(),
+    new Date(),
+    text,
+    tempUser
+  );
 
-    return {type: NEW_CHATMESSAGE, payload: {message, chatroomId }};
+  return { type: NEW_CHATMESSAGE, payload: { message, chatroomId } };
 };
 
-export const fetchMessages = (userId) => {
-
-    firebase.database()
-        .ref('ChatRooms/ChatMessages')
-        .on('value', (snapshot) =>{
-
-        })
-
-        return {type: NEW_FIREBASE_CHATMESSAGE, payload: {message, chatroomId }}; 
-}
-
+export const fetchChatRooms = (chatrooms) => {
+  
+      return {
+        type: GET_FIREBASE_CHATROOMS,
+        payload: { chatrooms },
+      };
+    
+};

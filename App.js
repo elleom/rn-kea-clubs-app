@@ -19,16 +19,22 @@ const fetchFont = () => {
 }
 
 import { Provider } from "react-redux";
-import ReduxThunk from "redux-thunk";
 import ChatReducer from "./store/reducers/ChatReducer";
 import { combineReducers, createStore, applyMiddleware } from "redux";
+
+import ReduxThunk from "redux-thunk";
+//import { getFirebase } from "react-redux-firebase";
+//import { reactReduxFirebase } from "react-redux-firebase";
+
+//import { firebase } from "./firebase/firebaseConfig";
+import "firebase/firestore";
+import "firebase/database";
 
 const rootReducer = combineReducers({
   chat: ChatReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
-
 
 export default function App() {
     const [fontLoaded, setFontLoaded] = useState(false);

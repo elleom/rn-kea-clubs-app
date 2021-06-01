@@ -7,6 +7,8 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const ChatRoom = (props) => {
 
+  console.log(props)
+
 
   const lastPos = props.chatroom.chatMessages.length - 1;
   let lastMessageText = "";

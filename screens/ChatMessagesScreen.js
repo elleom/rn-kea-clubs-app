@@ -29,7 +29,11 @@ const ChatMessagesScreen = (props) => {
     (room) => room.id === id
   ).chatMessages;
 
-  //console.log(chatMessages)
+  /**
+   * 
+   * console.log("dummy data: ");
+  console.log(chatMessages)
+   */
 
   const handleSend = () => {
     console.log("value " + value);

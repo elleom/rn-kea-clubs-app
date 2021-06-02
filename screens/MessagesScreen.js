@@ -3,43 +3,42 @@ import { View, FlatList, StyleSheet, Button } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
+import { fetchChatRooms } from "./../store/ChatActions";
+
 //own imports
 import ChatRoom from "./../components/ChatRoom";
 import CustomHeaderButton from "../components/CustomHeaderButton";
 import Colors from "../constants/Colors";
 
-import { fetchChatRooms } from "./../store/ChatActions";
-
-import { firebase } from "./../firebase/firebaseConfig";
-import "firebase/firestore";
-import "firebase/database";
-
 const MessagesScreen = (props) => {
-  const dispatch = useDispatch();
+    //const dispatch = useDispatch();
 
-  useEffect(() => {
-    firebase
-      .database()
-      .ref("CBSDatabase/ObjChatRooms")
-      .on("value", (snapshot) => {
-        dispatch(fetchChatRooms(snapshot.val()));
-      });
+  
+/*
+useEffect(() => {
+    dispatch(fetchChatRooms());
   });
-  const chatroomsFirebase = useSelector(
-    (state) => state.chat.firebaseChatrooms
-  ); // selecting from redux store
-  //const chatrooms = useSelector((state) => state.chat.chatrooms); // selecting from redux store
+*/
+  
+ 
+  
 
-  console.log(chatroomsFirebase);
+  // selecting from redux store
+  const chatrooms = useSelector((state) => state.chat.chatrooms); // selecting from redux store
+
+ /*
+ const firebaseChatrooms = useSelector((state) => state.chat.firebaseChatrooms); // selecting from redux store
+  console.log(firebaseChatrooms)
+ */
+
 
   //console.log("THIS IS redux store DATA:")
   //console.log(chatroomsFirebase)  <Button title="getchatrooms_console" onPress={handleSend}></Button>
 
   return (
     <View style={styles.container}>
-
-      <FlatList
-        data={chatroomsFirebase}
+        <FlatList
+        data={chatrooms}
         renderItem={(itemData) => (
           <ChatRoom
             chatroom={itemData.item}
@@ -48,7 +47,6 @@ const MessagesScreen = (props) => {
         )}
         keyExtractor={(item) => item.id}
       />
-
       {/*
         <FlatList
         data={chatrooms}

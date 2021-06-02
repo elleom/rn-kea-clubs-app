@@ -7,12 +7,14 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const ChatRoom = (props) => {
 
-  console.log(props)
+  //console.log("ChatRoom")
+  //console.log(props)
 
 
   const lastPos = props.chatroom.chatMessages.length - 1;
   let lastMessageText = "";
   let displayTime = "";
+  let photoUrl = props.chatroom.photoUrl.url;
   if (lastPos > -1) {
     lastMessageText =
       props.chatroom.chatMessages[props.chatroom.chatMessages.length - 1]
@@ -23,7 +25,9 @@ const ChatRoom = (props) => {
 
     // Should only do this if on the same date as today...
     displayTime = lastTime.getHours() + ":" + lastTime.getMinutes();
+    
   }
+  console.log(photoUrl)
 
   return (
     <TouchableOpacity
@@ -35,7 +39,7 @@ const ChatRoom = (props) => {
         <View style={styles.imageView}>
           <Image
             style={styles.tinyLogo}
-            source={require("./../assets/ac99082f65d5c636e14e70785817899e.png")}
+            source={photoUrl}
           />
         </View>
         <View style={styles.textView}>
@@ -68,7 +72,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     paddingLeft: 20,
-    paddingRight: 20,
+    paddingRight: 20
   },
   textView: {
     paddingLeft: 5,
@@ -84,6 +88,8 @@ const styles = StyleSheet.create({
   },
   imageView: {
     marginTop: -10,
+    overflow:'hidden',
+    borderRadius: 40
   },
   dot: {
     height: 12,

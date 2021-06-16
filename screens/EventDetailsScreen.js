@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image, ScrollView, TouchableOpacity} from 'react-native'
 import Colors from "../constants/Colors";
 import {EVENTS} from "../data/dummy-data";
@@ -10,6 +10,35 @@ const EventDetailsScreen = props => {
     const eventId = props.navigation.getParam('eventId')
     const selectedEvent = EVENTS.find(event => event.id === eventId);
     const MoreIcon = require("../assets/icon.png");
+
+    const [attendanceStatus, setAttendanceStatus] = useState('???');
+    const [attendees, setAttendees] = useState(0);
+    const [interestedPeople, setInterestedPeople] = useState(0);
+    const interested = () => {
+        if (attendanceStatus === 'GOING'){
+            setAttendees(attendees-1)
+
+        }
+        if (attendanceStatus !== 'INTERESTED'){
+            setInterestedPeople(interestedPeople+1);
+        }
+        setAttendanceStatus('INTERESTED')
+
+    }
+    const going = () => {
+        if (attendanceStatus !== 'GOING') {
+            setAttendees(attendees+1);
+        }
+        setAttendanceStatus('GOING')}
+    const notGoing = () => {
+        if (attendanceStatus === 'GOING') {
+            setAttendees(attendees-1);
+        }
+        if (attendanceStatus == 'INTERESTED'){
+            setInterestedPeople(interestedPeople-1);
+        }
+        setAttendanceStatus('NOT GOING')
+    }
 
 
     return (
@@ -54,22 +83,26 @@ const EventDetailsScreen = props => {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.optionsContainer}>
-                        <Text style={styles.optionsText}>INTERESTED</Text>
+                        <Text style={styles.optionsText}>{attendanceStatus}</Text>
+
                         <OptionsMenu style={styles.options}
                                      button={MoreIcon}
                                      buttonStyle={{width: 32, height: 8, margin: 7.5, resizeMode: "contain"}}
                                      destructiveIndex={1}
                                      options={["Interested", "Going", 'Not Going', "Cancel"]}
+                                     actions={[interested, going, notGoing]}
                         />
+
+
                     </View>
                     <View style={styles.eventCounterContainer}>
                         <View style={styles.peopleCounter}>
                             <Ionicons name="star" size={25} color={Colors.primaryColor}/>
-                            <Text>145 Interested</Text>
+                            <Text>{interestedPeople} Interested</Text>
                         </View>
                         <View style={styles.peopleCounter}>
                             <Ionicons name="people" size={25} color={Colors.primaryColor}/>
-                            <Text>35 Going</Text>
+                            <Text>{attendees} Going</Text>
                         </View>
                     </View>
                     <View style={styles.detailsContainer}>

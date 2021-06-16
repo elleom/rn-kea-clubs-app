@@ -8,18 +8,19 @@ const ChatMessage = props => {
     //show time if time is not the same as previous time and same user
     //show date if this message contains a new date compared to previous.
 
-    const hardcodedUserId = '1';
+    const hardcodedUserId = 'junior@cbs.dk';
+    const userIdOfMessage = props.chatmessage.sentBy;
 
-    const hours = props.chatmessage.createdDate.getHours();
-    const minutes = props.chatmessage.createdDate.getMinutes();
-    
-    
-    const userIdOfMessage = props.chatmessage.user.id;
+
+    const date = new Date(props.chatmessage.sentAt * 1000);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+
     const isMe = hardcodedUserId === userIdOfMessage;
 
     let name;
     if (!isMe){
-        name = 'From ' + props.chatmessage.user.name;
+        name = 'From ' + props.chatmessage.sentBy;
     }
     console.log("----------------: " + props.img);
     // only display the image if this message is not written by me.
@@ -30,7 +31,9 @@ const ChatMessage = props => {
             source={ props.img } />
     }    
 
+
     return (
+
         <View style={styles.outerContainer}>
             <View style={[styles.container, isMe ? styles.reverseContainer : '']}>
                 {image}
@@ -43,6 +46,7 @@ const ChatMessage = props => {
                 <Text style={styles.time}>{name}  {hours}:{minutes}</Text>
             </View>
         </View>
+      
     );
 }
 

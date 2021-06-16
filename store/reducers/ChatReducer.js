@@ -1,6 +1,9 @@
-import { ADD_TO_TEST, TOGGLE_HAPPY, NEW_CHATMESSAGE, DELETE_MESSAGE, GET_FIREBASE_CHATROOMS } from './../ChatActions';
+import { ADD_TO_TEST, TOGGLE_HAPPY, NEW_CHATMESSAGE, DELETE_MESSAGE, GET_FIREBASE_CHATROOMS, FETCH_STARTED } from './../ChatActions';
 // import from dummy data to access chat
 import { CHATROOM } from '../../data/dummy-data';
+import { firebase } from "./../../firebase/firebaseConfig";
+import "firebase/firestore";
+import "firebase/database";
 
 /*
 const initialState = {
@@ -16,7 +19,8 @@ const initialState = {
     happy: false,
     test: ['Hi', 'There'],
     chatrooms: CHATROOM,
-    firebaseChatrooms: []
+    firebaseChatrooms: [],
+    loading: false
     //...
 }
 
@@ -73,10 +77,22 @@ const ChatReducer = (state = initialState, action) => {
 
         case GET_FIREBASE_CHATROOMS:
             // Adds the new value to the array, but without making state mutations.
+            
+                return {
+                    ...state,
+                    firebaseChatrooms: [...state.firebaseChatrooms, action.payload]
+                }
+
+
+             
+
+        case FETCH_STARTED:
+        // Adds the new value to the array, but without making state mutations.
+        
             return {
-                ...state,
-                firebaseChatrooms: [...state.firebaseChatrooms, action.payload]
-            }
+            ...state,
+            loading: true
+        }
 
         case TOGGLE_HAPPY:
             return {

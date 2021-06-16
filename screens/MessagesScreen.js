@@ -8,49 +8,38 @@ import ChatRoom from "./../components/ChatRoom";
 import CustomHeaderButton from "../components/CustomHeaderButton";
 import Colors from "../constants/Colors";
 
-import { fetchChatRooms } from "./../store/ChatActions";
+import uuid from "uuid"
 
-import { firebase } from "./../firebase/firebaseConfig";
-import "firebase/firestore";
-import "firebase/database";
+
 
 const MessagesScreen = (props) => {
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    firebase
-      .database()
-      .ref("CBSDatabase/ObjChatRooms")
-      .on("value", (snapshot) => {
-        dispatch(fetchChatRooms(snapshot.val()));
-      });
-  });
-  const chatroomsFirebase = useSelector(
-    (state) => state.chat.firebaseChatrooms
-  ); // selecting from redux store
+
+ 
+  // selecting from redux store
   //const chatrooms = useSelector((state) => state.chat.chatrooms); // selecting from redux store
 
-  console.log(chatroomsFirebase);
 
-  //console.log("THIS IS redux store DATA:")
-  //console.log(chatroomsFirebase)  <Button title="getchatrooms_console" onPress={handleSend}></Button>
+  const firebaseChatrooms = useSelector((state) => state.chat.firebaseChatrooms); // selecting from redux store
+  const objChatrooms = firebaseChatrooms[0].chatrooms
+
+  const chatrooms = Object.entries(objChatrooms).map(item => {
+    
+    return item;
+    //console.log(item[1].name)
+  })
+
+  //console.log(firebaseChatrooms[0].chatrooms)
+ /*
+ const firebaseChatrooms = useSelector((state) => state.chat.firebaseChatrooms); // selecting from redux store
+  console.log(firebaseChatrooms)
+ */
+
 
   return (
     <View style={styles.container}>
-
-      <FlatList
-        data={chatroomsFirebase}
-        renderItem={(itemData) => (
-          <ChatRoom
-            chatroom={itemData.item}
-            navigation={props.navigation}
-          ></ChatRoom>
-        )}
-        keyExtractor={(item) => item.id}
-      />
-
-      {/*
         <FlatList
+        
         data={chatrooms}
         renderItem={(itemData) => (
           <ChatRoom
@@ -58,9 +47,9 @@ const MessagesScreen = (props) => {
             navigation={props.navigation}
           ></ChatRoom>
         )}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item, index) => index.toString()}
       />
-        */}
+      
     </View>
   );
 };

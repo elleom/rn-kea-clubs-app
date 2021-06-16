@@ -11,7 +11,6 @@ import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 
 
-
 //screens
 import ClubsScreen from '../screens/ClubsScreen'
 import DiscoveryScreen from "../screens/DiscoveryScreen";
@@ -21,6 +20,7 @@ import MenuScreen from "../screens/MenuScreen";
 import ClubEventsScreen from "../screens/ClubEventsScreen";
 import EventDetailsScreen from "../screens/EventDetailsScreen";
 import ChatMessagesScreen from '../screens/ChatMessagesScreen';
+
 
 //own imports
 import Colors from "../constants/Colors";

@@ -1,9 +1,9 @@
-import {StatusBar} from 'expo-status-bar';
-import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
 import MainNavigator from "./navigation/MainNavigator";
 import * as Font from 'expo-font';
 import AppLoading from "expo-app-loading";
+import FirstScreen from "./screens/FirstScreen";
 
 
 const fetchFont = () => {
@@ -19,6 +19,20 @@ const fetchFont = () => {
 
 }
 
+
+import { Provider } from "react-redux";
+import ChatReducer from "./store/reducers/ChatReducer";
+import { combineReducers, createStore, applyMiddleware, compose } from "redux";
+
+import ReduxThunk from "redux-thunk";
+
+
+const rootReducer = combineReducers({
+  chat: ChatReducer,
+});
+
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+
 export default function App() {
     const [fontLoaded, setFontLoaded] = useState(false);
 
@@ -32,8 +46,10 @@ export default function App() {
     }
 
     return (
-        <MainNavigator/>
-    );
+    <Provider store={store}>
+      <FirstScreen />
+    </Provider>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -44,3 +60,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
+
+

@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useEffect } from 'react';
 import {View, Text, Button, StyleSheet, Platform, FlatList} from 'react-native'
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import CustomHeaderButton from "../components/CustomHeaderButton";
@@ -32,7 +33,6 @@ const ClubsScreen = props => {
             />
         )
     }
-
 
     return (
         <View style={styles.screen}>

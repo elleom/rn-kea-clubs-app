@@ -41,19 +41,33 @@ export const addToChats = (text, chatroomId) => {
 };
 
 export const fetchChatRooms = () => {
-  return dispatch => {
 
-    dispatch(fetchStarted())
-
+  return (dispatch) => {
+    //make async call to database
     const chatRef = firebase.database().ref("CBSDatabase/ObjChatRooms");
+            chatRef
+            .once("value")
+            .then(snapshot => {
+                const chatrooms = snapshot.val()
+                dispatch({type: GET_FIREBASE_CHATROOMS, payload: { chatrooms }})
 
-    const data = chatRef.once("value").then(async (snapshot) => {
-      
-        return snapshot.val();     
-      });
-      
-      dispatch({ type: GET_FIREBASE_CHATROOMS, payload: data }) ;
-    }
+            })
+
+    
+
+  }
+
+  /*
+const chatRef = firebase.database().ref("CBSDatabase/ObjChatRooms");
+            chatRef.once("value")
+            .then(snapshot => {
+                const chatrooms = snapshot.val()
+                return {
+                  type: GET_FIREBASE_CHATROOMS, payload: { chatrooms }
+                }
+
+            })
+  */
   
 };
 

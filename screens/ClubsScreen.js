@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {View, Text, Button, StyleSheet, Platform} from 'react-native'
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import CustomHeaderButton from "../components/CustomHeaderButton";
 import Colors from "../constants/Colors";
 
 const ClubsScreen = props => {
+
+
     return (
         <View style={styles.text}>
             <Text>

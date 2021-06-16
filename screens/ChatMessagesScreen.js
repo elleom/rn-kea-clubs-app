@@ -10,7 +10,6 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { addToTest, addToChats } from "./../store/ChatActions";
 
-
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 //own imports
@@ -20,23 +19,44 @@ import ChatMessage from "../components/ChatMessage";
 
 const ChatMessagesScreen = (props) => {
   const dispatch = useDispatch();
+
   const id = props.navigation.state.params.id;
 
   const [value, onChangeText] = useState("Write message");
 
+  // Here I do some hacky maneuvers to extract the Messages data, since I did a poor data structure design
+  //On the firebase real-time data base
+  const objChatrooms = useSelector(
+    (state) => state.chat.firebaseChatrooms[0].chatrooms
+  );
 
-  const chatMessages = useSelector((state) => state.chat.chatrooms).find(
-    (room) => room.id === id
-  ).chatMessages;
+  //Stringify and got some positions
+  const strChatrooms = JSON.stringify(objChatrooms);
+  const pos = strChatrooms.search('"' + id + '"') - 2;
+  const strLastPos = strChatrooms.search('},"') + 1;
 
-  /**
-   * 
-   * console.log("dummy data: ");
-  console.log(chatMessages)
-   */
+  //Extract the strings I need
+
+  const extractedChatroom = strChatrooms.substring(pos, strLastPos);
+  const newPos = extractedChatroom.search('":{') + 2;
+
+  //console.log(extractedChatroom.substring(newPos, strLastPos));
+
+  //Parse back to JSON!
+
+  const jsonParseChatrooms = JSON.parse(
+    extractedChatroom.substring(newPos, strLastPos)
+  );
+
+  //Now I have what I need
+  //console.log(chatrooms);
+
+  const chatrooms = jsonParseChatrooms.chatMessages;
+
+  console.log(chatrooms);
 
   const handleSend = () => {
-    console.log("value " + value);
+    //console.log("value " + value);
     dispatch(addToChats(value, id));
   };
 
@@ -44,13 +64,15 @@ const ChatMessagesScreen = (props) => {
     <View style={styles.container}>
       <View style={styles.messages}>
         <FlatList
-          data={chatMessages}
+          data={chatrooms}
           renderItem={(itemData) => (
             <ChatMessage
               chatmessage={itemData.item}
               img={require("./../assets/ac99082f65d5c636e14e70785817899e.png")}
-            ></ChatMessage>
+              
+              ></ChatMessage>
           )}
+          keyExtractor={(item, index) => index.toString()}
         ></FlatList>
       </View>
 

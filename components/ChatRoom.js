@@ -7,43 +7,47 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const ChatRoom = (props) => {
 
-  //console.log("ChatRoom")
-  //console.log(props)
-
-
-  const lastPos = props.chatroom.chatMessages.length - 1;
+const lastPos = props.chatroom[1].chatMessages.length - 1;
   let lastMessageText = "";
   let displayTime = "";
-  let photoUrl = props.chatroom.photoUrl.url;
+  //let photoUrl = props.chatroom.photoUrl.url;
   if (lastPos > -1) {
     lastMessageText =
-      props.chatroom.chatMessages[props.chatroom.chatMessages.length - 1]
+      props.chatroom[1].chatMessages[lastPos]
         .message;
     const lastTime =
-      props.chatroom.chatMessages[props.chatroom.chatMessages.length - 1]
-        .createdDate;
+      props.chatroom[1].chatMessages[lastPos]
+        .sentAt;
 
     // Should only do this if on the same date as today...
-    displayTime = lastTime.getHours() + ":" + lastTime.getMinutes();
+    const date = new Date(lastTime * 1000);
+    displayTime = date.getHours() + ":" + date.getMinutes();
+
+    //console.log(lastMessageText)
+    //console.log(displayTime)
+    
     
   }
-  console.log(photoUrl)
+
+
+  
 
   return (
-    <TouchableOpacity
+
+<TouchableOpacity
     onPress={() =>
-        props.navigation.navigate('ChatMessages', {id:props.chatroom.id})
+        props.navigation.navigate('ChatMessages', {id:props.chatroom[0]})
       }
     >
       <View style={styles.chatRoom}>
         <View style={styles.imageView}>
           <Image
             style={styles.tinyLogo}
-            source={photoUrl}
+            source={require("./../assets/ac99082f65d5c636e14e70785817899e.png")}
           />
         </View>
         <View style={styles.textView}>
-          <Text style={styles.text}>{props.chatroom.name}</Text>
+          <Text style={styles.text}>{props.chatroom[1].name}</Text>
           <Text ellipsizeMode="tail" numberOfLines={1}>
             {lastMessageText}
           </Text>
@@ -54,6 +58,9 @@ const ChatRoom = (props) => {
         </View>
       </View>
     </TouchableOpacity>
+
+
+    
   );
 };
 

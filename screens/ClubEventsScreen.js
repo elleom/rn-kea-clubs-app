@@ -1,21 +1,14 @@
 import React from 'react';
-import {View, Text, Button, StyleSheet, Platform} from 'react-native'
+import {View, Text, Button, StyleSheet, Platform, FlatList, TouchableOpacity} from 'react-native'
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import CustomHeaderButton from "../components/CustomHeaderButton";
 import Colors from "../constants/Colors";
+import {EVENTS} from "../data/dummy-data";
 
 const ClubsEventScreen = props => {
     return (
-        <View style={styles.text}>
-            <Text>
-                This is the Events screen
-
-            </Text>
-            <Button title="Event Details" onPress={() => {
-                props.navigation.navigate({
-                    routeName: 'EventDetails'
-                })
-            }}/>
+        <View>
+            <Text>Something</Text>
         </View>
     )
 }

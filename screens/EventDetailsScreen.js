@@ -29,6 +29,9 @@ const EventDetailsScreen = props => {
         if (attendanceStatus !== 'GOING') {
             setAttendees(attendees+1);
         }
+        if (attendanceStatus === 'INTERESTED'){
+            setInterestedPeople(interestedPeople-1)
+        }
         setAttendanceStatus('GOING')}
     const notGoing = () => {
         if (attendanceStatus === 'GOING') {

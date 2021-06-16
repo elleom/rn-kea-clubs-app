@@ -9,7 +9,7 @@ export const TOGGLE_HAPPY = "TOGGLE_HAPPY";
 export const ADD_TO_TEST = "ADD_TO_TEST";
 export const NEW_CHATMESSAGE = "NEW_CHATMESSAGE";
 export const GET_FIREBASE_CHATROOMS = "GET_FIREBASE_CHATROOMS";
-export const FETCH_STARTED = "FETCH_STARTED"
+export const FETCH_STARTED = "FETCH_STARTED";
 
 export const toggleHappy = (happy) => {
   return { type: TOGGLE_HAPPY, payload: happy };
@@ -20,8 +20,48 @@ export const addToTest = (text) => {
   return { type: ADD_TO_TEST, payload: text };
 };
 
-export const addToChats = (text, chatroomId) => {
-  const tempUser = new User(
+export const addToChats = (text, chatroomId, userId) => {
+  return (dispatch) => {
+    //make async call to database
+    const chatRef = firebase
+      .database()
+      .ref("CBSDatabase/ObjChatRooms/" + chatroomId + "/chatMessages");
+
+    chatRef.once("value").then((snapshot) => {
+      const chatrooms = snapshot.val();
+      const newChatRooms = [
+        ...chatrooms,
+        {
+          message: text,
+          sentAt: Date.now(),
+          sentBy: userId,
+        },
+      ];
+
+      chatRef.set(newChatRooms);
+
+      const newChatRef = firebase
+      .database()
+      .ref("CBSDatabase/ObjChatRooms");
+
+      newChatRef.once("value").then((snapshot) => {
+        const chatrooms = snapshot.val();
+
+        
+
+        dispatch({
+          type: GET_FIREBASE_CHATROOMS,
+          payload:  {chatrooms} ,
+        });
+
+      });
+
+      
+    });
+  };
+
+  /*
+const tempUser = new User(
     "1",
     "Felix Sandgren",
     "1234",
@@ -38,40 +78,20 @@ export const addToChats = (text, chatroomId) => {
   );
 
   return { type: NEW_CHATMESSAGE, payload: { message, chatroomId } };
+  */
 };
 
 export const fetchChatRooms = () => {
-
   return (dispatch) => {
     //make async call to database
     const chatRef = firebase.database().ref("CBSDatabase/ObjChatRooms");
-            chatRef
-            .once("value")
-            .then(snapshot => {
-                const chatrooms = snapshot.val()
-                dispatch({type: GET_FIREBASE_CHATROOMS, payload: { chatrooms }})
-
-            })
-
-    
-
-  }
-
-  /*
-const chatRef = firebase.database().ref("CBSDatabase/ObjChatRooms");
-            chatRef.once("value")
-            .then(snapshot => {
-                const chatrooms = snapshot.val()
-                return {
-                  type: GET_FIREBASE_CHATROOMS, payload: { chatrooms }
-                }
-
-            })
-  */
-  
+    chatRef.once("value").then((snapshot) => {
+      const chatrooms = snapshot.val();
+      dispatch({ type: GET_FIREBASE_CHATROOMS, payload: { chatrooms } });
+    });
+  };
 };
 
 export const fetchStarted = () => {
- ({ type: FETCH_STARTED }) ;
-    
+  ({ type: FETCH_STARTED });
 };

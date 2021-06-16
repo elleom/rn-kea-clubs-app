@@ -77,6 +77,10 @@ const ChatReducer = (state = initialState, action) => {
 
         case GET_FIREBASE_CHATROOMS:
             // Adds the new value to the array, but without making state mutations.
+
+            console.log(action.payload)
+
+            state.firebaseChatrooms = [];
             
                 return {
                     ...state,

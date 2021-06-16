@@ -3,8 +3,6 @@ import { View, Text, StyleSheet, Image } from "react-native";
 
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-
-
 const ChatRoom = (props) => {
 
 const lastPos = props.chatroom[1].chatMessages.length - 1;
@@ -20,17 +18,10 @@ const lastPos = props.chatroom[1].chatMessages.length - 1;
         .sentAt;
 
     // Should only do this if on the same date as today...
-    const date = new Date(lastTime * 1000);
+    const date = new Date(lastTime);
     displayTime = date.getHours() + ":" + date.getMinutes();
-
-    //console.log(lastMessageText)
-    //console.log(displayTime)
-    
     
   }
-
-
-  
 
   return (
 

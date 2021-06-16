@@ -12,7 +12,7 @@ const ChatMessage = props => {
     const userIdOfMessage = props.chatmessage.sentBy;
 
 
-    const date = new Date(props.chatmessage.sentAt * 1000);
+    const date = new Date(props.chatmessage.sentAt);
     const hours = date.getHours();
     const minutes = date.getMinutes();
 

@@ -8,7 +8,7 @@ import {
   Image,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { addToTest, addToChats } from "./../store/ChatActions";
+import { addToChats } from "./../store/ChatActions";
 
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
@@ -33,31 +33,40 @@ const ChatMessagesScreen = (props) => {
   //Stringify and got some positions
   const strChatrooms = JSON.stringify(objChatrooms);
   const pos = strChatrooms.search('"' + id + '"') - 2;
-  const strLastPos = strChatrooms.search('},"') + 1;
 
+  const firstExtractedChatroom = strChatrooms.substring(pos, strChatrooms.length-1);
+
+  let strLastPos = 0;
+  let extractedChatroom = "";
+
+  if(firstExtractedChatroom.search('},"') === 0){
+
+     strLastPos = firstExtractedChatroom.length;
+     extractedChatroom = firstExtractedChatroom.substring(3, strLastPos);
+  }else{
+     strLastPos = firstExtractedChatroom.search('},"') + 1;
+      extractedChatroom = firstExtractedChatroom.substring(pos, strLastPos);
+    
+  }
+  
+  
   //Extract the strings I need
 
-  const extractedChatroom = strChatrooms.substring(pos, strLastPos);
+  
   const newPos = extractedChatroom.search('":{') + 2;
 
-  //console.log(extractedChatroom.substring(newPos, strLastPos));
-
   //Parse back to JSON!
-
   const jsonParseChatrooms = JSON.parse(
     extractedChatroom.substring(newPos, strLastPos)
   );
 
   //Now I have what I need
-  //console.log(chatrooms);
 
   const chatrooms = jsonParseChatrooms.chatMessages;
 
-  console.log(chatrooms);
 
   const handleSend = () => {
-    //console.log("value " + value);
-    dispatch(addToChats(value, id));
+    dispatch(addToChats(value, id, 'junior@cbs.dk'));
   };
 
   return (

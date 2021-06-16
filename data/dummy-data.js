@@ -33,7 +33,7 @@ export const CHATMESSAGES3 = [
 export const CHATROOM = [
     new ChatRoom('1',new Date(2021, 0, 1, 2, 0, 0), 'CBS Surf', CHATMESSAGES, {url : require("./../assets/ac99082f65d5c636e14e70785817899e.png")}),
     new ChatRoom('2',new Date(2021, 0, 1, 2, 1, 0), 'CBS Students', CHATMESSAGES2, {url : require("./../assets/kv_01.jpg")}),
-    new ChatRoom('3',new Date(2021, 0, 1, 2, 2, 0), 'CBS Poker', CHATMESSAGES3, {url : require("./../assets/poker.jpg")})
+    new ChatRoom('3',new Date(2021, 0, 1, 2, 2, 0), 'CBS Poker', CHATMESSAGES3, {url : require("./../assets/poker.jpg")}),
 
     new ChatRoom('1',new Date(2021, 0, 1, 2, 0, 0), 'CBS Surf', CHATMESSAGES),
     new ChatRoom('2',new Date(2021, 0, 1, 2, 1, 0), 'CBS Students', []),

@@ -6,7 +6,7 @@ import {Ionicons} from "@expo/vector-icons";
 //navigation imports
 import {createAppContainer} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack';
-//import {createDrawerNavigator} from "react-navigation-drawer";
+import {createDrawerNavigator} from "react-navigation-drawer";
 import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom-tabs";
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 
@@ -17,7 +17,7 @@ import DiscoveryScreen from "../screens/DiscoveryScreen";
 import MessagesScreen from "../screens/MessagesScreen";
 import MenuScreen from "../screens/MenuScreen";
 
-import ClubEventsScreen from "../screens/ClubEventsScreen";
+import ClubEventsScreen from "../screens/User/UserEventsScreen";
 import EventDetailsScreen from "../screens/EventDetailsScreen";
 import ChatMessagesScreen from '../screens/ChatMessagesScreen';
 
@@ -26,43 +26,43 @@ import ChatMessagesScreen from '../screens/ChatMessagesScreen';
 import Colors from "../constants/Colors";
 
 
-
 const defaultStackNavOptions = {
     headerStyle: {
         backgroundColor: Platform.OS === 'android' ? Colors.accentColor : '' //if none described then default
     },
-    headerTitleStyle: {
-
-    }, headerBackTitleStyle: {
-
-    },
+    headerTitleStyle: {}, headerBackTitleStyle: {},
     headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor
-    
+
 }
 
 const ClubsStackNavigator = createStackNavigator({
     Clubs: ClubsScreen, // short form, no option specifications
-    ClubEvent: ClubEventsScreen,
     EventDetails: EventDetailsScreen
-}, {
-    
+}, {navigationOptions: {
+        drawerIcon: drawerConfig =>
+            <Ionicons
+                name={'md-cart'}
+                size={23}
+                color={drawerConfig.tintColor}
+            />
+    },
+    //points to the nav option stored above,
     defaultNavigationOptions: defaultStackNavOptions
-
 });
 
 const MessagesStackNavigator = createStackNavigator({
-    Messages : MessagesScreen,
-    ChatMessages : ChatMessagesScreen
-},{
+    Messages: MessagesScreen,
+    ChatMessages: ChatMessagesScreen
+}, {
     defaultNavigationOptions: defaultStackNavOptions
 });
 
 const tabScreenConfig = {
     Clubs: {
-        screen: ClubsStackNavigator,  navigationOptions: {
+        screen: ClubsStackNavigator, navigationOptions: {
             tabBarIcon: (tabInfo) => {
-                return(<SimpleLineIcons name='people' size={25} color={tabInfo.tintColor}/>) 
-                 
+                return (<SimpleLineIcons name='people' size={25} color={tabInfo.tintColor}/>)
+
             },
             tabBarColor: Colors.primaryColor,
             tabBarLabel: 'Clubs'
@@ -99,21 +99,21 @@ const tabScreenConfig = {
 
 const ClubsTabNavigator = Platform.OS === 'android'
     ? createMaterialBottomTabNavigator(tabScreenConfig, {
-        activeTintColor: 'white',
-        shifting: true,
-        barStyle: {
-            backgroundColor: Colors.primaryColor
-        }
+            activeTintColor: 'white',
+            shifting: true,
+            barStyle: {
+                backgroundColor: Colors.primaryColor
+            }
         }
     )
     : createBottomTabNavigator(tabScreenConfig,
         { // need specification over the
             //set identifier + object
             activeTintColor: 'white',
-        shifting: true,
-        barStyle: {
-            backgroundColor: Colors.primaryColor
-        }
+            shifting: true,
+            barStyle: {
+                backgroundColor: Colors.primaryColor
+            }
         }, {
             tabBarOptions: {
                 activeBackgroundColor: Colors.primaryColor,
@@ -126,6 +126,11 @@ const ClubsTabNavigator = Platform.OS === 'android'
         }
     )
 
+const MainDrawerNavigator = createDrawerNavigator(
+    {   Events: ClubsTabNavigator,
+        Admin: ClubEventsScreen
+    }
+)
 
 
-export default createAppContainer(ClubsTabNavigator); //nested navigators pattern
+export default createAppContainer(MainDrawerNavigator); //nested navigators pattern

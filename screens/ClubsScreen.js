@@ -52,15 +52,15 @@ ClubsScreen.navigationOptions = navData => {
             backgroundColor: Colors.accentColor
         },
         headerTitle: 'Events',
-        /*
+
         headerLeft: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
             <Item
                 title='Clubs'
                 iconName={'ios-menu'}
                 onPress={() => {
-
+                    navData.navigation.toggleDrawer();
                 }}/>
-        </HeaderButtons>*/
+        </HeaderButtons>
     }
 }
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Text, Button, StyleSheet, Platform, FlatList, TouchableOpacity} from 'react-native'
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
-import CustomHeaderButton from "../components/CustomHeaderButton";
-import Colors from "../constants/Colors";
-import {EVENTS} from "../data/dummy-data";
+import CustomHeaderButton from "../../components/CustomHeaderButton";
+import Colors from "../../constants/Colors";
+import {EVENTS} from "../../data/dummy-data";
 
 const ClubsEventScreen = props => {
     return (
@@ -18,7 +18,7 @@ ClubsEventScreen.navigationOptions = navData => {
         headerStyle: {
             backgroundColor: Colors.accentColor
         },
-        headerTitle: 'Events',
+        headerTitle: 'User Events',
         headerRight: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
             <Item
                 title='Clubs'

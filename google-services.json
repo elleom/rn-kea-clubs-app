@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "642068600207",
+    "firebase_url": "https://kea-app-rn-default-rtdb.firebaseio.com",
+    "project_id": "kea-app-rn",
+    "storage_bucket": "kea-app-rn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642068600207:android:b49dffe93e6802f127a7fa",
+        "android_client_info": {
+          "package_name": "dk.kea.stud.kea_rn_app2021"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642068600207-d4l4tulb3f94d0jivsnsj466ujediopj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBOo295FIM0ujoeBbMeyNyak9zGeXW7Fc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642068600207-d4l4tulb3f94d0jivsnsj466ujediopj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

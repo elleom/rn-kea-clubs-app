@@ -9,6 +9,9 @@ import ChatReducer from "./store/reducers/ChatReducer";
 import { combineReducers, createStore, applyMiddleware, compose } from "redux";
 import ReduxThunk from "redux-thunk";
 import auth from '@react-native-firebase/auth';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs(['Setting a timer']);
 
 
 const fetchFont = () => {

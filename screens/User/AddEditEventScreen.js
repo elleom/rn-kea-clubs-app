@@ -5,7 +5,7 @@ import CustomHeaderButton from "../../components/CustomHeaderButton";
 import Colors from "../../constants/Colors";
 import {EVENTS} from "../../data/dummy-data";
 
-const ClubsEventScreen = props => {
+const AddEditEventScreen = props => {
     return (
         <View>
             <Text>Here to edit</Text>
@@ -13,7 +13,7 @@ const ClubsEventScreen = props => {
     )
 }
 
-ClubsEventScreen.navigationOptions = navData => {
+AddEditEventScreen.navigationOptions = navData => {
     return {
         headerStyle: {
             backgroundColor: Colors.accentColor
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
     }
 )
 
-export default ClubsEventScreen;
+export default AddEditEventScreen;

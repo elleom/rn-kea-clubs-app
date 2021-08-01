@@ -24,6 +24,8 @@ import ChatMessagesScreen from '../screens/ChatMessagesScreen';
 
 //own imports
 import Colors from "../constants/Colors";
+import UserEventsScreen from "../screens/User/UserEventsScreen";
+import AddEditEventScreen from "../screens/User/AddEditEventScreen";
 
 
 const defaultStackNavOptions = {
@@ -38,7 +40,24 @@ const defaultStackNavOptions = {
 const ClubsStackNavigator = createStackNavigator({
     Clubs: ClubsScreen, // short form, no option specifications
     EventDetails: EventDetailsScreen
-}, {navigationOptions: {
+}, {
+    navigationOptions: {
+        drawerIcon: drawerConfig =>
+            <Ionicons
+                name={'md-cart'}
+                size={23}
+                color={drawerConfig.tintColor}
+            />
+    },
+    //points to the nav option stored above,
+    defaultNavigationOptions: defaultStackNavOptions
+});
+
+const UserStackNavigator = createStackNavigator({
+    UserEvents: UserEventsScreen, // short form, no option specifications
+    EditEvent: AddEditEventScreen
+}, {
+    navigationOptions: {
         drawerIcon: drawerConfig =>
             <Ionicons
                 name={'md-cart'}
@@ -113,8 +132,7 @@ const ClubsTabNavigator = Platform.OS === 'android'
             shifting: true,
             barStyle: {
                 backgroundColor: Colors.primaryColor
-            }
-        }, {
+            },
             tabBarOptions: {
                 activeBackgroundColor: Colors.primaryColor,
                 inactiveBackgroundColor: Colors.accentColor,
@@ -127,8 +145,9 @@ const ClubsTabNavigator = Platform.OS === 'android'
     )
 
 const MainDrawerNavigator = createDrawerNavigator(
-    {   Events: ClubsTabNavigator,
-        Admin: ClubEventsScreen
+    {
+        Events: ClubsTabNavigator,
+        Admin: UserStackNavigator
     }
 )
 

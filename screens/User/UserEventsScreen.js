@@ -1,19 +1,52 @@
 import React from 'react';
-import {View, Text, Button, StyleSheet, Platform, FlatList, TouchableOpacity} from 'react-native'
+import {View, Text, StyleSheet, Button, FlatList} from 'react-native'
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import CustomHeaderButton from "../../components/CustomHeaderButton";
 import Colors from "../../constants/Colors";
+import EventItem from "../../components/EventItem";
 import {EVENTS} from "../../data/dummy-data";
 
-const ClubsEventScreen = props => {
+const UserEventScreen = props => {
+
+    const renderEventItem = eventItemData => {
+        return (
+            <EventItem
+                id={eventItemData.item.id}
+                type={eventItemData.item.type}
+                title={eventItemData.item.title}
+                description={eventItemData.item.description}
+                image={eventItemData.item.image}
+                startDate={eventItemData.item.startDate}
+                endDate={eventItemData.item.endDate}
+                location={eventItemData.item.location}
+                organization={eventItemData.item.organization}
+                onSelect={() => {
+                    props.navigation.navigate({
+                        routeName: 'EditEvent',
+                        params: {
+                            eventId: eventItemData.item.id,
+                            eventName: eventItemData.item.title
+                        }
+                    })
+                }}
+            />
+        )
+    }
+
     return (
-        <View>
-            <Text>Something</Text>
+        <View style={styles.screen}>
+            <FlatList
+                keyExtractor={(item => item.id)}
+                data={EVENTS} keyExtractor={(item, index) => item.id}
+                renderItem={renderEventItem}
+                style={{width: '100%'}}
+            />
         </View>
     )
+
 }
 
-ClubsEventScreen.navigationOptions = navData => {
+UserEventScreen.navigationOptions = navData => {
     return {
         headerStyle: {
             backgroundColor: Colors.accentColor
@@ -38,4 +71,4 @@ const styles = StyleSheet.create({
     }
 )
 
-export default ClubsEventScreen;
+export default UserEventScreen;

@@ -33,6 +33,7 @@ const UserEventScreen = props => {
         )
     }
 
+
     return (
         <View style={styles.screen}>
             <FlatList
@@ -47,6 +48,8 @@ const UserEventScreen = props => {
 }
 
 UserEventScreen.navigationOptions = navData => {
+
+    const eventItemDataId = navData.navigation.getParam('eventId')
     return {
         headerStyle: {
             backgroundColor: Colors.accentColor

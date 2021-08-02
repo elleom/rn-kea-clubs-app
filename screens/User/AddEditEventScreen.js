@@ -6,9 +6,10 @@ import Colors from "../../constants/Colors";
 import {EVENTS} from "../../data/dummy-data";
 
 const AddEditEventScreen = props => {
+    const eventId = props.navigation.getParam('eventId')
     return (
         <View>
-            <Text>Here to edit</Text>
+            <Text>{eventId}</Text>
         </View>
     )
 }

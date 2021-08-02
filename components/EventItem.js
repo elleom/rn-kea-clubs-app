@@ -1,4 +1,5 @@
-import React from 'react';
+import
+    React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, ImageBackground, Image} from "react-native";
 import {LinearGradient} from 'expo-linear-gradient';
 import {Ionicons} from "@expo/vector-icons";
@@ -26,8 +27,6 @@ const EventItem = props => {
                                 <Text style={styles.detailsText}>{props.startDate}</Text>
                             </View>
                         </View>
-
-
                     </ImageBackground>
                 </View>
             </TouchableOpacity>

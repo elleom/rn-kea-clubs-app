@@ -1,13 +1,12 @@
-
-import React, { useEffect } from 'react';
-import {View, Text, Button, StyleSheet, Platform, FlatList} from 'react-native'
+import React from 'react';
+import {View, Text, StyleSheet, Button, FlatList} from 'react-native'
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
-import CustomHeaderButton from "../components/CustomHeaderButton";
-import Colors from "../constants/Colors";
-import EventItem from "../components/EventItem";
-import {EVENTS} from "../data/dummy-data";
+import CustomHeaderButton from "../../components/CustomHeaderButton";
+import Colors from "../../constants/Colors";
+import EventItem from "../../components/EventItem";
+import {EVENTS} from "../../data/dummy-data";
 
-const ClubsScreen = props => {
+const UserEventScreen = props => {
 
     const renderEventItem = eventItemData => {
         return (
@@ -23,7 +22,7 @@ const ClubsScreen = props => {
                 organization={eventItemData.item.organization}
                 onSelect={() => {
                     props.navigation.navigate({
-                        routeName: 'EventDetails',
+                        routeName: 'EditEvent',
                         params: {
                             eventId: eventItemData.item.id,
                             eventName: eventItemData.item.title
@@ -33,6 +32,7 @@ const ClubsScreen = props => {
             />
         )
     }
+
 
     return (
         <View style={styles.screen}>
@@ -44,15 +44,17 @@ const ClubsScreen = props => {
             />
         </View>
     )
+
 }
 
-ClubsScreen.navigationOptions = navData => {
+UserEventScreen.navigationOptions = navData => {
+
+    const eventItemDataId = navData.navigation.getParam('eventId')
     return {
         headerStyle: {
             backgroundColor: Colors.accentColor
         },
-        headerTitle: 'Events',
-
+        headerTitle: 'User Events',
         headerLeft: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
             <Item
                 title='Clubs'
@@ -60,18 +62,25 @@ ClubsScreen.navigationOptions = navData => {
                 onPress={() => {
                     navData.navigation.toggleDrawer();
                 }}/>
+        </HeaderButtons>,
+        headerRight: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+            <Item
+                title='Clubs'
+                iconName={'add-circle-sharp'}
+                iconSize={23}
+                onPress={() => {
+
+                }}/>
         </HeaderButtons>
     }
 }
 
 const styles = StyleSheet.create({
-        screen: {
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: 15
+        text: {
+            marginTop: 50,
+            alignItems: 'center'
         }
     }
 )
 
-export default ClubsScreen;
+export default UserEventScreen;

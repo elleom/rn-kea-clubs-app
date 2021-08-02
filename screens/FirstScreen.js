@@ -10,7 +10,7 @@ const FirstScreen = () => {
 
     useEffect(() => {
         dispatch(fetchChatRooms());
-        console.log("Hello")
+        console.log("Opening App")
         });
 
 

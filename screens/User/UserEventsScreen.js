@@ -52,10 +52,19 @@ UserEventScreen.navigationOptions = navData => {
             backgroundColor: Colors.accentColor
         },
         headerTitle: 'User Events',
-        headerRight: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        headerLeft: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
             <Item
                 title='Clubs'
                 iconName={'ios-menu'}
+                onPress={() => {
+                    navData.navigation.toggleDrawer();
+                }}/>
+        </HeaderButtons>,
+        headerRight: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+            <Item
+                title='Clubs'
+                iconName={'add-circle-sharp'}
+                iconSize={23}
                 onPress={() => {
 
                 }}/>

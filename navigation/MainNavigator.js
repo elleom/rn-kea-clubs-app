@@ -1,7 +1,7 @@
 import React from 'react';
 import {Platform} from 'react-native'
 import {SimpleLineIcons} from "@expo/vector-icons";
-import {Ionicons} from "@expo/vector-icons";
+import {Ionicons, MaterialIcons} from "@expo/vector-icons";
 
 //navigation imports
 import {createAppContainer} from 'react-navigation'
@@ -41,14 +41,7 @@ const ClubsStackNavigator = createStackNavigator({
     Clubs: ClubsScreen, // short form, no option specifications
     EventDetails: EventDetailsScreen
 }, {
-    navigationOptions: {
-        drawerIcon: drawerConfig =>
-            <Ionicons
-                name={'md-cart'}
-                size={23}
-                color={drawerConfig.tintColor}
-            />
-    },
+
     //points to the nav option stored above,
     defaultNavigationOptions: defaultStackNavOptions
 });
@@ -60,7 +53,7 @@ const UserStackNavigator = createStackNavigator({
     navigationOptions: {
         drawerIcon: drawerConfig =>
             <Ionicons
-                name={'md-cart'}
+                name={'ios-brush-outline'}
                 size={23}
                 color={drawerConfig.tintColor}
             />
@@ -122,6 +115,14 @@ const ClubsTabNavigator = Platform.OS === 'android'
             shifting: true,
             barStyle: {
                 backgroundColor: Colors.primaryColor
+            },
+            navigationOptions: {
+                drawerIcon: drawerConfig =>
+                    <MaterialIcons
+                        name={'event'}
+                        size={23}
+                        color={drawerConfig.tintColor}
+                    />
             }
         }
     )
@@ -140,6 +141,14 @@ const ClubsTabNavigator = Platform.OS === 'android'
                     fontFamily: 'open-sans-bold'
                 },
                 activeTintColor: Colors.accentColor,
+                navigationOptions: {
+                    drawerIcon: drawerConfig =>
+                        <Ionicons
+                            name={'md-cart'}
+                            size={23}
+                            color={drawerConfig.tintColor}
+                        />
+                }
             }
         }
     )

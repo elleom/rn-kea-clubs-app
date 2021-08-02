@@ -22,11 +22,21 @@ AddEditEventScreen.navigationOptions = navData => {
         headerRight: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
             <Item
                 title='Clubs'
-                iconName={'ios-menu'}
+                iconName={'send-sharp'}
+                iconSize={23}
                 onPress={() => {
 
                 }}/>
-        </HeaderButtons>
+        </HeaderButtons>,
+        headerLeft: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+            <Item
+                title='Clubs'
+                iconName={'ios-menu'}
+                onPress={() => {
+                    navData.navigation.toggleDrawer();
+                }}/>
+        </HeaderButtons>,
+
     }
 }
 

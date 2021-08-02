@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Button, FlatList} from 'react-native'
+import {View, StyleSheet, FlatList} from 'react-native'
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import CustomHeaderButton from "../../components/CustomHeaderButton";
 import Colors from "../../constants/Colors";
@@ -38,7 +38,7 @@ const UserEventScreen = props => {
         <View style={styles.screen}>
             <FlatList
                 keyExtractor={(item => item.id)}
-                data={EVENTS} keyExtractor={(item, index) => item.id}
+                data={EVENTS}
                 renderItem={renderEventItem}
                 style={{width: '100%'}}
             />

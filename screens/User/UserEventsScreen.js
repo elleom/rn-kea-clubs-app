@@ -49,7 +49,6 @@ const UserEventScreen = props => {
 
 UserEventScreen.navigationOptions = navData => {
 
-    const eventItemDataId = navData.navigation.getParam('eventId')
     return {
         headerStyle: {
             backgroundColor: Colors.accentColor
@@ -69,7 +68,7 @@ UserEventScreen.navigationOptions = navData => {
                 iconName={'add-circle-sharp'}
                 iconSize={23}
                 onPress={() => {
-
+                    navData.navigation.navigate('EditEvent');
                 }}/>
         </HeaderButtons>
     }

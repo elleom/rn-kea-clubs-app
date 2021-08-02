@@ -1,6 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useState, useEffect} from 'react';
-import MainNavigator from "./navigation/MainNavigator";
 import * as Font from 'expo-font';
 import AppLoading from "expo-app-loading";
 import FirstScreen from "./screens/FirstScreen";
@@ -33,7 +32,7 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 
-function LogginApp() {
+function LoginApp() {
     //set initializing state whilst Firebase connects
     const [initializing, setInitializing] = useState(true);
     const [user, setUser] = useState(); //no given default state
@@ -45,8 +44,8 @@ function LogginApp() {
     }
 
     useEffect(() => {
-        const suscriber = auth().onAuthStateChanged(onAuthStateChangeHandler);
-        return suscriber; //unsubscribe on unmount
+        const subscriber = auth().onAuthStateChanged(onAuthStateChangeHandler);
+        return subscriber; //unsubscribe on unmount
     })
 
     if (initializing) return null;

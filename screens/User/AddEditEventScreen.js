@@ -7,20 +7,29 @@ import Colors from "../../constants/Colors";
 import {EVENTS} from "../../data/dummy-data";
 import DateRangePicker from "rnv-date-range-picker";
 import moment from "moment";
-import RNDateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import {Ionicons} from "@expo/vector-icons";
 
 const AddEditEventScreen = props => {
     const eventId = props.navigation.getParam('eventId')
     const [selectedRange, setRange] = useState({});
-    const [show, setShow] = useState(false);
+    const [showStart, setShowStart] = useState(false);
+    const [showEnd, setShowEnd] = useState(false);
 
-    const setDate = (event, date) => {
-        setShow(false);
-        console.log(event);
-        console.log(date)
-        console.log(show);
-    }
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+
+    const handleConfirm = (date) => {
+        console.warn("A date has been picked: ", date);
+        hideDatePicker();
+    };
 
 
     return (
@@ -77,18 +86,23 @@ const AddEditEventScreen = props => {
                     <View style={styles.eventTimeContainer}>
                         <View style={styles.eventTime}>
                             <Text>Start</Text>
-                            <Ionicons name='timer-outline' size={40} onPress={() => {
-                                setShow(true);
-                            }}/>
-                            {show && <RNDateTimePicker mode="time" display={'clock'} value={new Date()}/>}
+                            <Ionicons name='timer-outline' size={40} onPress={showDatePicker}/>
+                            <DateTimePickerModal
+                                isVisible={isDatePickerVisible}
+                                mode="date"
+                                onConfirm={handleConfirm}
+                                onCancel={hideDatePicker}
+                            />
                         </View>
                         <View>
                             <Text>Start</Text>
-                            <Ionicons name='timer-outline' size={40} onPress={() => {
-                                setShow(true);
-                            }}/>
-                            {show && <RNDateTimePicker mode="time" display={'clock'}
-                                                       value={new Date()}/>}
+                            <Ionicons name='timer-outline' size={40} onPress={showDatePicker}/>
+                            <DateTimePickerModal
+                                isVisible={isDatePickerVisible}
+                                mode="date"
+                                onConfirm={handleConfirm}
+                                onCancel={hideDatePicker}
+                            />
                         </View>
                     </View>
 

@@ -89,7 +89,7 @@ const AddEditEventScreen = props => {
                             <Ionicons name='timer-outline' size={40} onPress={showDatePicker}/>
                             <DateTimePickerModal
                                 isVisible={isDatePickerVisible}
-                                mode="date"
+                                mode="time"
                                 onConfirm={handleConfirm}
                                 onCancel={hideDatePicker}
                             />
@@ -99,7 +99,7 @@ const AddEditEventScreen = props => {
                             <Ionicons name='timer-outline' size={40} onPress={showDatePicker}/>
                             <DateTimePickerModal
                                 isVisible={isDatePickerVisible}
-                                mode="date"
+                                mode="time"
                                 onConfirm={handleConfirm}
                                 onCancel={hideDatePicker}
                             />

@@ -12,16 +12,15 @@ import {Ionicons} from "@expo/vector-icons";
 
 const AddEditEventScreen = props => {
     const eventId = props.navigation.getParam('eventId')
+    /*
+    returns an array with the single object, index 0
+     */
+    const eventObject = EVENTS.find(event => event.id === eventId);
 
-    if (eventId) {
-        const eventObject = EVENTS.filter(item => item.id === eventId);
-        console.log(eventObject)
-    }
 
     const [selectedRange, setRange] = useState({});
     const [showStart, setShowStart] = useState(false);
     const [showEnd, setShowEnd] = useState(false);
-
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
     const showDatePicker = () => {
@@ -37,6 +36,10 @@ const AddEditEventScreen = props => {
         hideDatePicker();
     };
 
+    /**
+     * form state
+     */
+    const [title, setTitle] = useState(eventObject ? eventObject.title : '')
 
     return (
         <KeyboardAvoidingView style={{flex: 1}} behavior={"padding"} keyboardVerticalOffset={100}>
@@ -49,10 +52,10 @@ const AddEditEventScreen = props => {
                         errorText="Please enter a valid title!"
                         keyboardType="default"
                         autoCapitalize="sentences"
+                        value={title}
                         autoCorrect
                         returnKeyType="next"
-                        onInputChange={() => {
-                        }}
+                        onInputChange={() => {}}
                         initialValue={() => {
                         }}
                         initiallyValid={() => {
@@ -67,10 +70,6 @@ const AddEditEventScreen = props => {
                         keyboardType="default"
                         returnKeyType="next"
                         onInputChange={() => {
-                        }}
-                        initialValue={() => {
-                        }}
-                        initiallyValid={() => {
                         }}
                         required
                     />
@@ -138,7 +137,7 @@ const AddEditEventScreen = props => {
 
 AddEditEventScreen.navigationOptions = navData => {
     const eventId = navData.navigation.getParam('eventId');
-    console.log(eventId)
+
     return {
         headerStyle: {
             backgroundColor: Colors.accentColor

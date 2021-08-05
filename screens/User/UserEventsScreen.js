@@ -9,6 +9,7 @@ import {EVENTS} from "../../data/dummy-data";
 const UserEventScreen = props => {
 
     const renderEventItem = eventItemData => {
+
         return (
             <EventItem
                 id={eventItemData.item.id}

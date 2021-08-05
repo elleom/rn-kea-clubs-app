@@ -12,6 +12,12 @@ import {Ionicons} from "@expo/vector-icons";
 
 const AddEditEventScreen = props => {
     const eventId = props.navigation.getParam('eventId')
+
+    if (eventId) {
+        const eventObject = EVENTS.filter(item => item.id === eventId);
+        console.log(eventObject)
+    }
+
     const [selectedRange, setRange] = useState({});
     const [showStart, setShowStart] = useState(false);
     const [showEnd, setShowEnd] = useState(false);
@@ -131,11 +137,17 @@ const AddEditEventScreen = props => {
 }
 
 AddEditEventScreen.navigationOptions = navData => {
+    const eventId = navData.navigation.getParam('eventId');
+    console.log(eventId)
     return {
         headerStyle: {
             backgroundColor: Colors.accentColor
         },
-        headerTitle: 'Events',
+        /**
+         * eventId is passed on as param on
+         * if eventId != undefined then header title will change accordingly
+         */
+        headerTitle: eventId ? 'Edit Event' : 'Add Event',
         headerRight: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
             <Item
                 title='Clubs'

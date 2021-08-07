@@ -66,8 +66,6 @@ const AddEditEventScreen = props => {
     const [imageUrl, setImageUrl] = useState(eventObject ? eventObject.image : '')
     const [type, setType] = useState(eventObject ? eventObject.type : '')
     const [description, setDescription] = useState(eventObject ? eventObject.description : '')
-    const [startDate, setStartDate] = useState(eventObject ? eventObject.startDate : new Date())
-    const [endDate, setEndDate] = useState(eventObject ? eventObject.endDate : new Date())
     const [location, setLocation] = useState(eventObject ? eventObject.location : '')
     const [organization, setOrganization] = useState(eventObject ? eventObject.organization : '')
     const [evetTimeDetails, setEventTimeDetails] = useState('')
@@ -124,6 +122,7 @@ const AddEditEventScreen = props => {
                     />
                     <Text>Image URL</Text>
                     <TextInput
+                        value={imageUrl}
                         id="imageUrl"
                         label="Image Url"
                         errorText="Please enter a valid image url!"
@@ -133,6 +132,19 @@ const AddEditEventScreen = props => {
                         }}
                         required
                     />
+                    <Text>Location</Text>
+                    <TextInput
+                        value={location}
+                        id="location"
+                        label="location"
+                        errorText="Please enter a valid image url!"
+                        keyboardType="default"
+                        returnKeyType="next"
+                        onInputChange={() => {
+                        }}
+                        required
+                    />
+
 
                     {/*<DateRangePicker*/}
                     {/*    onSelectDateRange={onSelectDateHandler}*/}

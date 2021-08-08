@@ -12,7 +12,6 @@ import {Ionicons} from "@expo/vector-icons";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
 
 
-
 const AddEditEventScreen = props => {
     const eventId = props.navigation.getParam('eventId')
     /*
@@ -71,7 +70,6 @@ const AddEditEventScreen = props => {
     const [evetTimeDetails, setEventTimeDetails] = useState('')
 
 
-
     const [date, setDate] = useState(new Date(1598051730000));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
@@ -90,18 +88,23 @@ const AddEditEventScreen = props => {
 
     const showDatepicker = () => {
         showMode('date');
+        console.log('clicked')
+
+
     };
 
     const showTimepicker = () => {
         showMode('time');
-    };
+        console.log('clicked')
 
+    };
 
 
     return (
         <KeyboardAvoidingView style={{flex: 1}} behavior={"padding"} keyboardVerticalOffset={100}>
             <ScrollView>
                 <View style={styles.form}>
+
                     <Text>Event title</Text>
                     <TextInput
                         id="title"
@@ -144,45 +147,22 @@ const AddEditEventScreen = props => {
                         }}
                         required
                     />
-
-
-                    {/*<DateRangePicker*/}
-                    {/*    onSelectDateRange={onSelectDateHandler}*/}
-
-                    {/*    responseFormat="DD-MM-YYYY"*/}
-                    {/*    minDate={moment()}*/}
-                    {/*    maxDate={moment().add(30, "days")}*/}
-                    {/*/>*/}
-
-
-                    {/*<View style={styles.container}>*/}
-                    {/*    <Text>first date: {selectedRange.firstDate}</Text>*/}
-                    {/*    <Text>second date: {selectedRange.secondDate}</Text>*/}
-                    {/*</View>*/}
-
-                    <View style={styles.eventTimeContainer}>
-                        <Text>Start</Text>
-                        <View style={styles.eventTime}>
-
-                            <Ionicons name='calendar-outline' size={32} onPress={showDatepicker}/>
-                            <Ionicons name='timer-outline' size={32} onPress={showTimepicker}/>
-
+                    <View style={styles.container}>
+                        <View style={styles.eventTimeContainer}>
+                            <Text style={styles.timeText}>Start</Text>
+                            <View style={styles.icons}>
+                                <Ionicons name='calendar-outline' size={32} onPress={showDatepicker}/>
+                                <Ionicons name='timer-outline' size={32} onPress={showTimepicker}/>
+                            </View>
                         </View>
-                        <View>
-                            <Button onPress={showTimepicker} title="Show time picker!" />
+                        <View style={styles.eventTimeContainer}>
+                            <Text style={styles.timeText}>End</Text>
+                            <View style={styles.icons}>
+                                <Ionicons name='calendar-outline' size={32} onPress={() => {}}/>
+                                <Ionicons name='timer-outline' size={32} onPress={() => {}}/>
+                            </View>
                         </View>
-                        {show && (
-                            <RNDateTimePicker
-                                testID="dateTimePicker"
-                                value={date}
-                                mode={mode}
-                                is24Hour={true}
-                                display="default"
-                                onChange={onChange}
-                            />
-                        )}
                     </View>
-
 
                     <Text>Description</Text>
                     <TextInput
@@ -246,11 +226,19 @@ const styles = StyleSheet.create({
             alignItems: 'center'
         },
         eventTimeContainer: {
+            width: '50%',
+        },
+        icons: {
             flexDirection: 'row',
             justifyContent: 'space-evenly',
             alignContent: 'space-between'
         },
-        eventTime: {}
+        container: {
+            flexDirection: 'row'
+        },
+        timeText: {
+            textAlign: 'center',
+        }
     }
 )
 

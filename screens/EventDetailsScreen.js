@@ -81,6 +81,7 @@ const EventDetailsScreen = props => {
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {
+                            props.navigation.navigate('Messages')
                         }}>
                             <Ionicons name="chatbubbles-outline" size={40} color={Colors.accentColor}/>
                         </TouchableOpacity>

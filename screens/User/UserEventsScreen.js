@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Button, FlatList} from 'react-native'
+import {View, StyleSheet, FlatList} from 'react-native'
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import CustomHeaderButton from "../../components/CustomHeaderButton";
 import Colors from "../../constants/Colors";
@@ -9,6 +9,7 @@ import {EVENTS} from "../../data/dummy-data";
 const UserEventScreen = props => {
 
     const renderEventItem = eventItemData => {
+
         return (
             <EventItem
                 id={eventItemData.item.id}
@@ -38,7 +39,7 @@ const UserEventScreen = props => {
         <View style={styles.screen}>
             <FlatList
                 keyExtractor={(item => item.id)}
-                data={EVENTS} keyExtractor={(item, index) => item.id}
+                data={EVENTS}
                 renderItem={renderEventItem}
                 style={{width: '100%'}}
             />
@@ -49,7 +50,6 @@ const UserEventScreen = props => {
 
 UserEventScreen.navigationOptions = navData => {
 
-    const eventItemDataId = navData.navigation.getParam('eventId')
     return {
         headerStyle: {
             backgroundColor: Colors.accentColor
@@ -69,7 +69,7 @@ UserEventScreen.navigationOptions = navData => {
                 iconName={'add-circle-sharp'}
                 iconSize={23}
                 onPress={() => {
-
+                    navData.navigation.navigate('EditEvent');
                 }}/>
         </HeaderButtons>
     }

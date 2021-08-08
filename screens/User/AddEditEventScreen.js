@@ -158,11 +158,24 @@ const AddEditEventScreen = props => {
                         <View style={styles.eventTimeContainer}>
                             <Text style={styles.timeText}>End</Text>
                             <View style={styles.icons}>
-                                <Ionicons name='calendar-outline' size={32} onPress={() => {}}/>
-                                <Ionicons name='timer-outline' size={32} onPress={() => {}}/>
+                                <Ionicons name='calendar-outline' size={32} onPress={() => {
+                                }}/>
+                                <Ionicons name='timer-outline' size={32} onPress={() => {
+                                }}/>
                             </View>
                         </View>
                     </View>
+
+                    {show && (
+                        <RNDateTimePicker
+                            testID="dateTimePicker"
+                            value={date}
+                            mode={mode}
+                            is24Hour={true}
+                            display="default"
+                            onChange={onChange}
+                        />
+                    )}
 
                     <Text>Description</Text>
                     <TextInput

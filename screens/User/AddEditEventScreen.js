@@ -1,5 +1,15 @@
-import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet, ScrollView, KeyboardAvoidingView, TextInput, Platform} from 'react-native'
+import React, {useCallback, useEffect, useState} from 'react';
+import {
+    View,
+    Text,
+    Button,
+    StyleSheet,
+    ScrollView,
+    KeyboardAvoidingView,
+    TextInput,
+    Platform,
+    Alert
+} from 'react-native'
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import CustomHeaderButton from "../../components/CustomHeaderButton";
 import Colors from "../../constants/Colors";
@@ -10,6 +20,7 @@ import moment from "moment";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import {Ionicons} from "@expo/vector-icons";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
+import {useSelector} from "react-redux";
 
 
 const AddEditEventScreen = props => {
@@ -17,7 +28,41 @@ const AddEditEventScreen = props => {
     /*
     returns an array with the single object, index 0
      */
+    const editedEvent = useSelector(state => state.events.userEvents.find(event => event.id = eventId))
     const eventObject = EVENTS.find(event => event.id === eventId);
+
+    const submitHandler = useCallback(() => {
+        // if (!formState.formIsValid) {
+        //     Alert.alert('Wrong input!', 'Please check the errors in the form.', [
+        //         {text: 'Okay'}
+        //     ]);
+        //     return;
+        // }
+        if (editedEvent) {
+            dispatch(
+                productsActions.updateProduct(
+                    prodId,
+                    formState.inputValues.title,
+                    formState.inputValues.description,
+                    formState.inputValues.imageUrl
+                )
+            );
+        } else {
+            dispatch(
+                productsActions.createProduct(
+                    formState.inputValues.title,
+                    formState.inputValues.description,
+                    formState.inputValues.imageUrl,
+                    +formState.inputValues.price
+                )
+            );
+        }
+        props.navigation.goBack();
+    }, [dispatch, prodId, formState]);
+
+    useEffect(() => {
+        props.navigation.setParams({submit: submitHandler});
+    }, [submitHandler]);
 
 
     const [selectedRange, setRange] = useState({});
@@ -98,6 +143,8 @@ const AddEditEventScreen = props => {
         console.log('clicked')
 
     };
+
+
 
 
     return (
@@ -203,6 +250,8 @@ const AddEditEventScreen = props => {
 AddEditEventScreen.navigationOptions = navData => {
     const eventId = navData.navigation.getParam('eventId');
 
+    const submitForm = navData.navigation.getParam('submit');
+
     return {
         headerStyle: {
             backgroundColor: Colors.accentColor
@@ -217,9 +266,7 @@ AddEditEventScreen.navigationOptions = navData => {
                 title='Clubs'
                 iconName={'send-sharp'}
                 iconSize={23}
-                onPress={() => {
-
-                }}/>
+                onPress={submitForm}/>
         </HeaderButtons>,
         headerLeft: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
             <Item

@@ -2,118 +2,66 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {
     View,
     Text,
-    Button,
     StyleSheet,
     ScrollView,
     KeyboardAvoidingView,
     TextInput,
-    Platform,
-    Alert
+    Platform
 } from 'react-native'
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import CustomHeaderButton from "../../components/CustomHeaderButton";
 import Colors from "../../constants/Colors";
 
 import {EVENTS} from "../../data/dummy-data";
-import DateRangePicker from "rnv-date-range-picker";
-import moment from "moment";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
 import {Ionicons} from "@expo/vector-icons";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import * as eventActions from '../../store/actions/EventsActions'
 
 
 const AddEditEventScreen = props => {
-    const eventId = props.navigation.getParam('eventId')
-    /*
-    returns an array with the single object, index 0
-     */
-    const editedEvent = useSelector(state => state.events.userEvents.find(event => event.id = eventId))
-    const eventObject = EVENTS.find(event => event.id === eventId);
-
-    const submitHandler = useCallback(() => {
-        // if (!formState.formIsValid) {
-        //     Alert.alert('Wrong input!', 'Please check the errors in the form.', [
-        //         {text: 'Okay'}
-        //     ]);
-        //     return;
-        // }
-        if (editedEvent) {
-            dispatch(
-                productsActions.updateProduct(
-                    prodId,
-                    formState.inputValues.title,
-                    formState.inputValues.description,
-                    formState.inputValues.imageUrl
-                )
-            );
-        } else {
-            dispatch(
-                productsActions.createProduct(
-                    formState.inputValues.title,
-                    formState.inputValues.description,
-                    formState.inputValues.imageUrl,
-                    +formState.inputValues.price
-                )
-            );
-        }
-        props.navigation.goBack();
-    }, [dispatch, prodId, formState]);
-
-    useEffect(() => {
-        props.navigation.setParams({submit: submitHandler});
-    }, [submitHandler]);
-
-
-    const [selectedRange, setRange] = useState({});
-    const [showStart, setShowStart] = useState(false);
-    const [showEnd, setShowEnd] = useState(false);
-    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
-    const onSelectDateHandler = (range) => {
-        // const day = parseInt((range.firstDate.slice(0,2)));
-        // const month = parseInt(range.firstDate.slice(3,5));
-        // const year = parseInt(range.firstDate.slice(6));
-        // console.log(day)
-        // console.log(month)
-        // console.log(year)
-        // const newStartDate = new Date(year, month, day )
-        // const mockDate = new Date(2021,8,6)
-        // console.log(mockDate);
-        const date = moment(range.firstDate, "DD-MM-YYYY").toDate()
-        console.log(date)
-        console.warn(date)
-
-        setRange(range);
-    }
-
-    const showDatePicker = () => {
-        setDatePickerVisibility(true);
-    };
-
-    const hideDatePicker = (date) => {
-        setDatePickerVisibility(false);
-    };
-
-    const handleConfirm = (date) => {
-        setStartDate(date);
-        console.log(date);
-        console.warn("A date has been picked: ", date);
-        hideDatePicker();
-    };
 
     /**
      * form state
      * if evenObject is true/defined then loads the date, else generates new initial value
      */
-    const [title, setTitle] = useState(eventObject ? eventObject.title : '')
-    const [imageUrl, setImageUrl] = useState(eventObject ? eventObject.image : '')
-    const [type, setType] = useState(eventObject ? eventObject.type : '')
-    const [description, setDescription] = useState(eventObject ? eventObject.description : '')
-    const [location, setLocation] = useState(eventObject ? eventObject.location : '')
-    const [organization, setOrganization] = useState(eventObject ? eventObject.organization : '')
-    const [evetTimeDetails, setEventTimeDetails] = useState('')
+    const [title, setTitle] = useState(eventObject ? eventObject.title : 'title')
+    const [imageUrl, setImageUrl] = useState(eventObject ? eventObject.image : 'image test')
+    const [type, setType] = useState(eventObject ? eventObject.type : 'Event test')
+    const [description, setDescription] = useState(eventObject ? eventObject.description : 'test')
+    const [location, setLocation] = useState(eventObject ? eventObject.location : 'Somewhere')
+    const [organization, setOrganization] = useState(eventObject ? eventObject.organization : 'KEA Events')
+    const [eventTimeDetails, setEventTimeDetails] = useState('')
 
+    const eventId = props.navigation.getParam('eventId')
+
+    /*
+    returns an array with the single object, index 0
+     */
+    const editedEvent = useSelector(state => state.events.userEvents.find(event => event.id = eventId))
+    const eventObject = EVENTS.find(event => event.id === eventId);
+    const dispatch = useDispatch();
+
+    const submitHandler = useCallback(() => {
+        dispatch(
+            eventActions.createEvent(
+                type,
+                title,
+                description,
+                imageUrl,
+                new Date().toString(),
+                new Date().toString(),
+                location,
+                organization
+            )
+        );
+
+        props.navigation.goBack();
+    }, [dispatch]);
+
+    useEffect(() => {
+        props.navigation.setParams({submit: submitHandler});
+    }, [submitHandler]);
 
     const [date, setDate] = useState(new Date(1598051730000));
     const [mode, setMode] = useState('date');
@@ -134,18 +82,12 @@ const AddEditEventScreen = props => {
     const showDatepicker = () => {
         showMode('date');
         console.log('clicked')
-
-
     };
 
     const showTimepicker = () => {
         showMode('time');
         console.log('clicked')
-
     };
-
-
-
 
     return (
         <KeyboardAvoidingView style={{flex: 1}} behavior={"padding"} keyboardVerticalOffset={100}>
@@ -230,6 +172,7 @@ const AddEditEventScreen = props => {
                         label="Description"
                         errorText="Please enter a valid description!"
                         keyboardType="default"
+                        value={description}
                         autoCapitalize="sentences"
                         autoCorrect
                         multiline

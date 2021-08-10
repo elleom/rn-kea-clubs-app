@@ -18,7 +18,7 @@ export const updateEvent = (id, type, title, description, image, startDate, endD
     }
 }
 
-export const createEvent = (id, type, title, description, image, startDate, endDate, location, organization) => {
+export const createEvent = (type, title, description, image, startDate, endDate, location, organization) => {
 
     /**
      * redux-thunk syntax manages it
@@ -29,7 +29,7 @@ export const createEvent = (id, type, title, description, image, startDate, endD
         //then before dispatch
 
         //save promise into const   OBS: similar to use .then() after the fetch call
-        const response = await fetch('https://kea-app-rn-default-rtdb.firebaseio.com/events.json', //REST API, can GET/POST/ => returns a promise
+        const response = await fetch('https://rn-kea-app-default-rtdb.firebaseio.com/events.json', //REST API, can GET/POST/ => returns a promise
             {
                 method: 'POST',
                 headers: {'Content-Type': 'Application/json'},
@@ -47,6 +47,7 @@ export const createEvent = (id, type, title, description, image, startDate, endD
             })
 
         const responseData = await response.json();
+        console.log(responseData)
 
         //this will only dispatch once the previous is done
         dispatch({

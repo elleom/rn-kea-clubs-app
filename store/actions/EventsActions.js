@@ -52,7 +52,7 @@ export const createEvent = (id, type, title, description, image, startDate, endD
         dispatch({
                 type: CREATE_EVENT,
                 // pid: id,
-                productData: {
+                eventData: {
                     id: responseData.name, //use as identifier in the rt-db
                     title: title,
                     description: description,

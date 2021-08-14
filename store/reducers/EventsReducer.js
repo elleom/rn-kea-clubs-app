@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
     switch (action.type) {
         case CREATE_EVENT:
             const newEvent = new Event(
-                new Date().toString(), //id,
+                action.eventData.id, //id
                 '1',
                 action.eventData.title,
                 action.eventData.description,

@@ -1,5 +1,22 @@
 export const UPDATE_EVENT = 'UPDATE_EVENT';
 export const CREATE_EVENT = 'CREATE_EVENT';
+export const SET_EVENTS = 'SET_EVENTS';
+
+export const fetchEvents = () => {
+    return async dispatch => {
+
+        const response = await fetch('https://rn-kea-app-default-rtdb.firebaseio.com/events.json', {
+            method: 'GET' //default
+        })
+        const responseData = await response.json()
+        const loadedEvents = [];
+        for (const key in responseData) {
+
+        }
+
+    }
+
+}
 
 export const updateEvent = (id, type, title, description, image, startDate, endDate, location, organization) => {
     return {

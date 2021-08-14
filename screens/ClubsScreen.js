@@ -6,8 +6,10 @@ import CustomHeaderButton from "../components/CustomHeaderButton";
 import Colors from "../constants/Colors";
 import EventItem from "../components/EventItem";
 import {EVENTS} from "../data/dummy-data";
+import {useSelector} from "react-redux";
 
 const ClubsScreen = props => {
+    const events = useSelector(state => state.events.availableEvents) // 'events' key from the store
 
     const renderEventItem = eventItemData => {
         return (
@@ -38,7 +40,7 @@ const ClubsScreen = props => {
         <View style={styles.screen}>
             <FlatList
                 keyExtractor={(item => item.id)}
-                data={EVENTS}
+                data={events}
                 renderItem={renderEventItem}
                 style={{width: '100%'}}
             />

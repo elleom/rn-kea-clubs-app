@@ -1,5 +1,22 @@
 export const UPDATE_EVENT = 'UPDATE_EVENT';
 export const CREATE_EVENT = 'CREATE_EVENT';
+export const SET_EVENTS = 'SET_EVENTS';
+
+export const fetchEvents = () => {
+    return async dispatch => {
+
+        const response = await fetch('https://rn-kea-app-default-rtdb.firebaseio.com/events.json', {
+            method: 'GET' //default
+        })
+        const responseData = await response.json()
+        const loadedEvents = [];
+        for (const key in responseData) {
+
+        }
+
+    }
+
+}
 
 export const updateEvent = (id, type, title, description, image, startDate, endDate, location, organization) => {
     return {
@@ -18,7 +35,7 @@ export const updateEvent = (id, type, title, description, image, startDate, endD
     }
 }
 
-export const createEvent = (id, type, title, description, image, startDate, endDate, location, organization) => {
+export const createEvent = (type, title, description, image, startDate, endDate, location, organization) => {
 
     /**
      * redux-thunk syntax manages it
@@ -29,7 +46,7 @@ export const createEvent = (id, type, title, description, image, startDate, endD
         //then before dispatch
 
         //save promise into const   OBS: similar to use .then() after the fetch call
-        const response = await fetch('https://kea-app-rn-default-rtdb.firebaseio.com/events.json', //REST API, can GET/POST/ => returns a promise
+        const response = await fetch('https://rn-kea-app-default-rtdb.firebaseio.com/events.json', //REST API, can GET/POST/ => returns a promise
             {
                 method: 'POST',
                 headers: {'Content-Type': 'Application/json'},
@@ -47,12 +64,13 @@ export const createEvent = (id, type, title, description, image, startDate, endD
             })
 
         const responseData = await response.json();
+        console.log(responseData)
 
         //this will only dispatch once the previous is done
         dispatch({
                 type: CREATE_EVENT,
                 // pid: id,
-                productData: {
+                eventData: {
                     id: responseData.name, //use as identifier in the rt-db
                     title: title,
                     description: description,

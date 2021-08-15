@@ -3,12 +3,13 @@ import React, {useState, useEffect} from 'react';
 import * as Font from 'expo-font';
 import AppLoading from "expo-app-loading";
 import FirstScreen from "./screens/FirstScreen";
-import { Provider } from "react-redux";
+import {Provider} from "react-redux";
 import ChatReducer from "./store/reducers/ChatReducer";
-import { combineReducers, createStore, applyMiddleware, compose } from "redux";
+import {combineReducers, createStore, applyMiddleware, compose} from "redux";
 import ReduxThunk from "redux-thunk";
 import auth from '@react-native-firebase/auth';
-import { LogBox } from 'react-native';
+import {LogBox} from 'react-native';
+import EventsReducer from "./store/reducers/EventsReducer";
 
 LogBox.ignoreLogs(['Setting a timer']);
 
@@ -26,7 +27,8 @@ const fetchFont = () => {
 }
 
 const rootReducer = combineReducers({
-  chat: ChatReducer,
+    chat: ChatReducer,
+    events: EventsReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
@@ -40,7 +42,7 @@ function LoginApp() {
 //user state changer
     const onAuthStateChangeHandler = user => {
         setUser(user);
-        if(initializing) setInitializing(false);
+        if (initializing) setInitializing(false);
     }
 
     useEffect(() => {
@@ -49,7 +51,7 @@ function LoginApp() {
     })
 
     if (initializing) return null;
-    if (!user){
+    if (!user) {
         return (
             <View>
                 <Text>Login</Text>
@@ -78,10 +80,10 @@ export default function App() {
 
     return (
 
-    <Provider store={store}>
-      <FirstScreen />
-    </Provider>
-  );
+        <Provider store={store}>
+            <FirstScreen/>
+        </Provider>
+    );
 }
 
 const styles = StyleSheet.create({

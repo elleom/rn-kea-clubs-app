@@ -46,7 +46,7 @@ const AuthScreen = () => {
 
 AuthScreen.navigationOptions = () => {
     return {
-        headerTitle: 'Welcome!',
+        headerTitle: 'Authenticate',
     }
 }
 

@@ -4,11 +4,17 @@ import Colors from "../constants/Colors";
 import {EVENTS} from "../data/dummy-data";
 import {Ionicons} from "@expo/vector-icons";
 import OptionsMenu from "react-native-option-menu";
+import {useSelector} from "react-redux";
 
 const EventDetailsScreen = props => {
 
+    //retrives the userId to pass onto the array loaded with state
     const eventId = props.navigation.getParam('eventId')
-    const selectedEvent = EVENTS.find(event => event.id === eventId);
+
+    //loads state (previously fetch on Clubs screen)
+    const selectedEvent = useSelector(
+        state => state.events.availableEvents.find(event => event.id === eventId)
+    )
     const MoreIcon = require("../assets/icon.png");
 
     const [attendanceStatus, setAttendanceStatus] = useState('???');
@@ -46,7 +52,7 @@ const EventDetailsScreen = props => {
 
     return (
         <ScrollView>
-            <Image source={{uri: selectedEvent.image}} style={styles.image}/>
+            <Image source={{uri: selectedEvent.imageUrl}} style={styles.image}/>
             <View style={styles.main}>
                 <View style={styles.text}>
                     <Text style={styles.title}>
@@ -110,14 +116,7 @@ const EventDetailsScreen = props => {
                         </View>
                     </View>
                     <View style={styles.detailsContainer}>
-                        <Text style={styles.descriptionText}>"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                            pariatur.
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                            anim id est laborum."</Text>
+                        <Text style={styles.descriptionText}>{selectedEvent.description}</Text>
                     </View>
 
                 </View>

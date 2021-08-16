@@ -13,9 +13,10 @@ export default (state = initialState, action) => {
             const newEvent = new Event(
                 action.eventData.id, //id
                 '1',
+                action.eventData.type,
                 action.eventData.title,
                 action.eventData.description,
-                action.eventData.image,
+                action.eventData.imageUrl,
                 action.eventData.startDate,
                 action.eventData.endDate,
                 action.eventData.description
@@ -28,7 +29,7 @@ export default (state = initialState, action) => {
         case SET_EVENTS:
             return {
                 availableEvents: action.events,
-                userEvents: action.events.filter( event => event.id === '1')
+                userEvents: action.events.filter( event => event.userId === '1') //hardcoded for test case
             }
     }
     return state;

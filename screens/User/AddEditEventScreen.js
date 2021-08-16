@@ -12,7 +12,6 @@ import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import CustomHeaderButton from "../../components/CustomHeaderButton";
 import Colors from "../../constants/Colors";
 
-import {EVENTS} from "../../data/dummy-data";
 import {Ionicons} from "@expo/vector-icons";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
 import {useDispatch, useSelector} from "react-redux";
@@ -25,31 +24,25 @@ const AddEditEventScreen = props => {
     /*
     returns an array with the single object, index 0
      */
+    const dispatch = useDispatch();
     const editedEvent = useSelector(state => state.events.userEvents.find(event => event.id = selectedEventId))
-
     /**
      * form state
      * if evenObject is true/defined then loads the date, else generates new initial value
      */
-    console.log(editedEvent)
-    const [title, setTitle] = useState(editedEvent ? editedEvent.title : 'title')
-    const [imageUrl, setImageUrl] = useState(editedEvent ? editedEvent.imageUrl : 'image test')
+    const [title, setTitle] = useState(editedEvent ? editedEvent.title : '')
+    const [imageUrl, setImageUrl] = useState(editedEvent ? editedEvent.imageUrl : '')
     const [type, setType] = useState(editedEvent ? editedEvent.type : 'Event')
-    const [description, setDescription] = useState(editedEvent ? editedEvent.description : 'test')
-    const [location, setLocation] = useState(editedEvent ? editedEvent.location : 'Somewhere')
-    const [organization, setOrganization] = useState(editedEvent ? editedEvent.organization : 'KEA Events')
+    const [description, setDescription] = useState(editedEvent ? editedEvent.description : '')
+    const [location, setLocation] = useState(editedEvent ? editedEvent.location : '')
+    const [organization, setOrganization] = useState(editedEvent ? editedEvent.organization : '')
     const [eventTimeDetails, setEventTimeDetails] = useState('')
-
-    const eventId = props.navigation.getParam('eventId')
-
-
-    const dispatch = useDispatch();
 
     const submitHandler = useCallback(() => {
         dispatch(
             eventActions.createEvent(
                 '1',
-                'event',
+                type,
                 title,
                 description,
                 imageUrl,

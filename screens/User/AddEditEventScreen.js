@@ -85,12 +85,12 @@ const AddEditEventScreen = props => {
 
     const showDatepicker = () => {
         showMode('date');
-        console.log('clicked')
+
     };
 
     const showTimepicker = () => {
         showMode('time');
-        console.log('clicked')
+
     };
 
     return (

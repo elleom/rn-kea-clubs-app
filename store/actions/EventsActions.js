@@ -11,11 +11,25 @@ export const fetchEvents = () => {
         const responseData = await response.json()
         const loadedEvents = [];
         for (const key in responseData) {
-
+            loadedEvents.push(new Event(
+                key,
+                responseData[key].title,
+                responseData[key].userId,
+                responseData[key].type,
+                responseData[key].title,
+                responseData[key].description,
+                responseData[key].image,
+                responseData[key].startDate,
+                responseData[key].endDate,
+                responseData[key].location,
+                responseData[key].organization,
+            ))
         }
-
+        dispatch({
+            type: SET_EVENTS,
+            events: loadedEvents
+        })
     }
-
 }
 
 export const updateEvent = (id, type, title, description, image, startDate, endDate, location, organization) => {
@@ -72,6 +86,8 @@ export const createEvent = (type, title, description, image, startDate, endDate,
                 // pid: id,
                 eventData: {
                     id: responseData.name, //use as identifier in the rt-db
+                    ownerId: '1',
+                    type: 'event',
                     title: title,
                     description: description,
                     image: image,

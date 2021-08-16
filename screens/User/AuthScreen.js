@@ -50,7 +50,7 @@ const AuthScreen = () => {
                         </View>
                         <View style={styles.buttonContainer}>
                             <Button style={styles.buttons}
-                                    title={isRegistered ? 'Login' : 'Sign Up'}
+                                    title={isRegistered ? 'Sign Up' : 'Log In'}
                                     color={Colors.accentColor} onPress={authHandler}/>
                             <Button style={styles.buttons}
                                     title={`Switch to ${isRegistered ? 'Log In' : 'Sign Up'}`}

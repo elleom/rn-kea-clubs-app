@@ -39,7 +39,7 @@ export const singIn = (email, password) => {
     try {
       const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`,
           {
-            method: 'GET',
+            method: 'POST',
             header: {
               'Content-Type': 'application/json'
             },

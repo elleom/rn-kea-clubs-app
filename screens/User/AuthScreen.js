@@ -2,11 +2,8 @@ import React, {useState} from 'react';
 import {ScrollView, TextInput, View, StyleSheet, Button, KeyboardAvoidingView, Text, Image} from "react-native";
 import Card from "../../components/UI/Card";
 import Colors from "../../constants/Colors";
-import {HeaderButtons, Item} from "react-navigation-header-buttons";
-import CustomHeaderButton from "../../components/CustomHeaderButton";
-import ClubsScreen from "../Clubs/ClubsScreen";
 
-const AuthScreen = props => {
+const AuthScreen = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     return (
@@ -23,7 +20,7 @@ const AuthScreen = props => {
                                 onChangeText={text => setEmail(text)}
                                 keyboardType='email-address'
                                 required email
-                                autoCapitalize="none"></TextInput>
+                                autoCapitalize="none"/>
                         </View>
                         <View style={styles.inputContainer}>
                             <Text>Password</Text>
@@ -32,13 +29,13 @@ const AuthScreen = props => {
                                 onChangeText={text => setPassword(text)}
                                 secureTextEntry={true}
                                 required
-                                autoCapitalize='none'></TextInput>
+                                autoCapitalize='none'/>
                         </View>
                         <View style={styles.buttonContainer}>
                             <Button style={styles.buttons} title='Login' color={Colors.accentColor} onPress={() => {
-                            }}></Button>
+                            }}/>
                             <Button style={styles.buttons} title='Sign Up' color={Colors.primaryColor} onPress={() => {
-                            }}></Button>
+                            }}/>
                         </View>
                     </ScrollView>
                 </Card>
@@ -47,7 +44,7 @@ const AuthScreen = props => {
     )
 }
 
-AuthScreen.navigationOptions = navData => {
+AuthScreen.navigationOptions = () => {
     return {
         headerTitle: 'Welcome!',
     }

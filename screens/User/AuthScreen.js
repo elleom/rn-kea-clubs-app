@@ -4,14 +4,22 @@ import Card from "../../components/UI/Card";
 import Colors from "../../constants/Colors";
 import {useDispatch} from "react-redux";
 import * as authActions from '../../store/actions/AuthActions';
+import {signUp} from "../../store/actions/AuthActions";
 
 const AuthScreen = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
 
-    const signUpHandler = () => {
-        dispatch(authActions.signUp(email, password))
+    const [isRegistered, setIsRegistered] = useState(false)
+
+    const authHandler = () => {
+        if (isRegistered) {
+            dispatch(authActions.signUp(email, password))
+        }
+        else {
+          dispatch(authActions.singIn(email, password))
+        }
     }
 
 
@@ -41,9 +49,15 @@ const AuthScreen = () => {
                                 autoCapitalize='none'/>
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button style={styles.buttons} title='Login' color={Colors.accentColor} onPress={() => {
-                            }}/>
-                            <Button style={styles.buttons} title='Sign Up' color={Colors.primaryColor} onPress={signUpHandler}/>
+                            <Button style={styles.buttons}
+                                    title={isRegistered ? 'Login' : 'Sign Up'}
+                                    color={Colors.accentColor} onPress={authHandler}/>
+                            <Button style={styles.buttons}
+                                    title={`Switch to ${isRegistered ? 'Log In' : 'Sign Up'}`}
+                                    color={Colors.primaryColor}
+                                    onPress={() => {
+                                        setIsRegistered(prevState =>  !prevState);
+                                    }}/>
                         </View>
                     </ScrollView>
                 </Card>

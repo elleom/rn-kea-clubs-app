@@ -1,6 +1,6 @@
 
 import React, {useCallback, useEffect, useState} from 'react';
-import {View, StyleSheet, FlatList} from 'react-native'
+import {View, StyleSheet, FlatList, ActivityIndicator, Text, Button} from 'react-native'
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import CustomHeaderButton from "../../components/CustomHeaderButton";
 import Colors from "../../constants/Colors";
@@ -61,9 +61,41 @@ const ClubsScreen = props => {
         )
     }
 
+    if (error) {
+        return (
+            <View style={styles.centered}>
+                <Text>An error occurred!</Text>
+                <Button
+                    title="Try again"
+                    onPress={loadEvents}
+                    color={Colors.primary}
+                />
+            </View>
+        );
+    }
+
+    if (isLoading) {
+        return (
+            <View style={styles.centered}>
+                <ActivityIndicator size="large" color={Colors.primary}/>
+            </View>
+        );
+    }
+
+    if (!isLoading && events.length === 0) {
+        return (
+            <View style={styles.centered}>
+                <Text>No products found. Maybe start adding some!</Text>
+            </View>
+        );
+    }
+
+
     return (
         <View style={styles.screen}>
             <FlatList
+                onRefresh={isLoading}
+                refreshing={isRefreshing}
                 keyExtractor={(item => item.id)}
                 data={events}
                 renderItem={renderEventItem}

@@ -9,6 +9,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import {createDrawerNavigator} from "react-navigation-drawer";
 import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom-tabs";
 import {createBottomTabNavigator} from 'react-navigation-tabs';
+import {createSwitchNavigator} from "react-navigation";
 
 
 //screens
@@ -26,6 +27,7 @@ import ChatMessagesScreen from '../screens/Clubs/ChatMessagesScreen';
 import Colors from "../constants/Colors";
 import UserEventsScreen from "../screens/User/UserEventsScreen";
 import AddEditEventScreen from "../screens/User/AddEditEventScreen";
+import AuthScreen from "../screens/User/AuthScreen";
 
 
 const defaultStackNavOptions = {
@@ -160,5 +162,13 @@ const MainDrawerNavigator = createDrawerNavigator(
     }
 )
 
+const AuthNavigator = createStackNavigator({
+    Login: AuthScreen
+})
 
-export default createAppContainer(MainDrawerNavigator); //nested navigators pattern
+const MainNavigator = createSwitchNavigator({
+    Auth: AuthNavigator,
+    Clubs: MainDrawerNavigator
+})
+
+export default createAppContainer(MainNavigator); //nested navigators pattern

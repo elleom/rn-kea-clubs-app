@@ -32,29 +32,36 @@ const AddEditEventScreen = props => {
      */
     const [title, setTitle] = useState(editedEvent ? editedEvent.title : '')
     const [imageUrl, setImageUrl] = useState(editedEvent ? editedEvent.imageUrl : '')
-    const [type, setType] = useState(editedEvent ? editedEvent.type : 'Event')
+    const [type, setType] = useState(editedEvent ? editedEvent.type : 'event') //HC
     const [description, setDescription] = useState(editedEvent ? editedEvent.description : '')
     const [location, setLocation] = useState(editedEvent ? editedEvent.location : '')
-    const [organization, setOrganization] = useState(editedEvent ? editedEvent.organization : '')
+    const [organization, setOrganization] = useState(editedEvent ? editedEvent.organization : 'Kea Events') //HC
     const [eventTimeDetails, setEventTimeDetails] = useState('')
 
-    const submitHandler = useCallback(() => {
-        dispatch(
-            eventActions.createEvent(
-                '1',
-                type,
-                title,
-                description,
-                imageUrl,
-                new Date().toString(),
-                new Date().toString(),
-                location,
-                organization
-            )
-        );
+    const submitHandler = useCallback(async () => {
+
+        try {
+            await dispatch(
+                eventActions.createEvent(
+                    '1',
+                    type,
+                    title,
+                    description,
+                    imageUrl,
+                    new Date().toString(), //HC
+                    new Date().toString(), //HC
+                    location,
+                    organization
+                )
+            );
+        } catch (error) {
+            console.warn(error.message);
+        }
+
 
         props.navigation.goBack();
-    }, [dispatch]);
+        //without the dependencies then the component will reload and have them blanked
+    }, [dispatch, title, description, imageUrl, location, organization]);
 
     useEffect(() => {
         props.navigation.setParams({submit: submitHandler});
@@ -101,12 +108,7 @@ const AddEditEventScreen = props => {
                         value={title}
                         autoCorrect
                         returnKeyType="next"
-                        onInputChange={() => {
-                        }}
-                        initialValue={() => {
-                        }}
-                        initiallyValid={() => {
-                        }}
+                        onChangeText={text => {setTitle(text)}}
                         required
                     />
                     <Text>Image URL</Text>
@@ -117,8 +119,7 @@ const AddEditEventScreen = props => {
                         errorText="Please enter a valid image url!"
                         keyboardType="default"
                         returnKeyType="next"
-                        onInputChange={() => {
-                        }}
+                        onChangeText={text => {setImageUrl(text)}}
                         required
                     />
                     <Text>Location</Text>
@@ -129,8 +130,7 @@ const AddEditEventScreen = props => {
                         errorText="Please enter a valid image url!"
                         keyboardType="default"
                         returnKeyType="next"
-                        onInputChange={() => {
-                        }}
+                        onChangeText={text => {setLocation(text)}}
                         required
                     />
                     <View style={styles.container}>
@@ -172,11 +172,10 @@ const AddEditEventScreen = props => {
                         value={description}
                         autoCapitalize="sentences"
                         autoCorrect
+                        returnKeyType='next'
                         multiline
                         numberOfLines={3}
-                        // onInputChange={inputChangeHandler}
-                        // initialValue={editedProduct ? editedProduct.description : ''}
-                        // initiallyValid={!!editedProduct}
+                        onChangeText={text => {setDescription(text)}}
                         required
                         minLength={5}
                     />

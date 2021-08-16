@@ -58,11 +58,13 @@ export const createEvent = (userId, type, title, description, imageUrl, startDat
      * if the action returns a func then thunk takes over and dispatches the action
      * as it was originally, though async code can be introduced in the func
      */
-    return async dispatch => { //added async func
+    return async (dispatch, getState) => { //added async func
         //then before dispatch
 
+        const token = getState().auth.token;  //auth is the name of the reducer declared on APP
+
         //save promise into const   OBS: similar to use .then() after the fetch call
-        const response = await fetch('https://rn-kea-app-default-rtdb.firebaseio.com/events.json', //REST API, can GET/POST/ => returns a promise
+        const response = await fetch(`https://rn-kea-app-default-rtdb.firebaseio.com/events.json?auth=${token}`, //REST API, can GET/POST/ => returns a promise
             {
                 method: 'POST',
                 headers: {'Content-Type': 'Application/json'},

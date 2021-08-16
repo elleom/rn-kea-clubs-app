@@ -1,25 +1,59 @@
-import React, {useState} from 'react';
-import {ScrollView, TextInput, View, StyleSheet, Button, KeyboardAvoidingView, Text, Image} from "react-native";
+import React, {useEffect, useState} from 'react';
+import {
+    ScrollView,
+    TextInput,
+    View,
+    StyleSheet,
+    Button,
+    KeyboardAvoidingView,
+    Text,
+    Image,
+    ActivityIndicator, Alert
+} from "react-native";
 import Card from "../../components/UI/Card";
 import Colors from "../../constants/Colors";
 import {useDispatch} from "react-redux";
 import * as authActions from '../../store/actions/AuthActions';
-import {signUp} from "../../store/actions/AuthActions";
 
-const AuthScreen = () => {
+const AuthScreen = props => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState();
     const dispatch = useDispatch();
+    const [isLoading, setIsLoading] = useState(false);
 
     const [isRegistered, setIsRegistered] = useState(false)
 
-    const authHandler = () => {
+    useEffect(() => {
+        if (error) {
+            console.warn('INNN')
+;            Alert.alert('An error occurred', error, [{text: 'OK'}])
+        }
+    }, [error])
+
+    const authHandler = async () => {
+        let action;
+
         if (isRegistered) {
-            dispatch(authActions.signUp(email, password))
+            console.log('Signing up')
+            action = authActions.signUp(email, password)
+        } else {
+            console.log('Login in')
+            action = authActions.singIn(email, password)
         }
-        else {
-          dispatch(authActions.singIn(email, password))
+        setError(null);
+        setIsLoading(true)
+        try {
+            await dispatch(action);
+            /*
+            if we made it this far then we can go IN :)
+             */
+            props.navigation.navigate('Clubs')
+        } catch (err) {
+            setError(err);
+            setIsLoading(false); //cant be outside cause we might be leaving the screen
         }
+
     }
 
 
@@ -49,15 +83,17 @@ const AuthScreen = () => {
                                 autoCapitalize='none'/>
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button style={styles.buttons}
-                                    title={isRegistered ? 'Sign Up' : 'Log In'}
-                                    color={Colors.accentColor} onPress={authHandler}/>
-                            <Button style={styles.buttons}
-                                    title={`Switch to ${isRegistered ? 'Log In' : 'Sign Up'}`}
-                                    color={Colors.primaryColor}
-                                    onPress={() => {
-                                        setIsRegistered(prevState =>  !prevState);
-                                    }}/>
+                            {isLoading ? <ActivityIndicator size='small' color={Colors.primaryColor}/>
+                                : (
+                                    <Button style={styles.buttons}
+                                            title={isRegistered ? 'Sign Up' : 'Log In'}
+                                            color={Colors.accentColor} onPress={authHandler}/>)}
+                            < Button style={styles.buttons}
+                                     title={`Switch to ${isRegistered ? 'Log In' : 'Sign Up'}`}
+                                     color={Colors.primaryColor}
+                                     onPress={() => {
+                                         setIsRegistered(prevState => !prevState);
+                                     }}/>
                         </View>
                     </ScrollView>
                 </Card>

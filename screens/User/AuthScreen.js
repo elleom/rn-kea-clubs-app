@@ -2,10 +2,19 @@ import React, {useState} from 'react';
 import {ScrollView, TextInput, View, StyleSheet, Button, KeyboardAvoidingView, Text, Image} from "react-native";
 import Card from "../../components/UI/Card";
 import Colors from "../../constants/Colors";
+import {useDispatch} from "react-redux";
+import * as authActions from '../../store/actions/AuthActions';
 
 const AuthScreen = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const dispatch = useDispatch();
+
+    const signUpHandler = () => {
+        dispatch(authActions.signUp(email, password))
+    }
+
+
     return (
         <View style={styles.screen}>
             <KeyboardAvoidingView keyboardVerticalOffset={50}>
@@ -34,8 +43,7 @@ const AuthScreen = () => {
                         <View style={styles.buttonContainer}>
                             <Button style={styles.buttons} title='Login' color={Colors.accentColor} onPress={() => {
                             }}/>
-                            <Button style={styles.buttons} title='Sign Up' color={Colors.primaryColor} onPress={() => {
-                            }}/>
+                            <Button style={styles.buttons} title='Sign Up' color={Colors.primaryColor} onPress={signUpHandler}/>
                         </View>
                     </ScrollView>
                 </Card>

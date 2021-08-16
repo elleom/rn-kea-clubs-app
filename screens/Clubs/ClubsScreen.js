@@ -2,12 +2,12 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {View, StyleSheet, FlatList} from 'react-native'
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
-import CustomHeaderButton from "../components/CustomHeaderButton";
-import Colors from "../constants/Colors";
-import EventItem from "../components/EventItem";
-import {EVENTS} from "../data/dummy-data";
+import CustomHeaderButton from "../../components/CustomHeaderButton";
+import Colors from "../../constants/Colors";
+import EventItem from "../../components/EventItem";
+import {EVENTS} from "../../data/dummy-data";
 import {useDispatch, useSelector} from "react-redux";
-import * as eventActions from '../store/actions/EventsActions'
+import * as eventActions from '../../store/actions/EventsActions'
 
 const ClubsScreen = props => {
     const events = useSelector(state => state.events.availableEvents) // 'events' key from the store

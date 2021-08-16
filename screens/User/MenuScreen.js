@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text, Button, StyleSheet, SafeAreaView,TouchableOpacity, StatusBar} from 'react-native'
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
-import CustomHeaderButton from "../components/CustomHeaderButton";
-import Colors from "../constants/Colors";
+import CustomHeaderButton from "../../components/CustomHeaderButton";
+import Colors from "../../constants/Colors";
 
 const MenuScreen = props => {
     return (

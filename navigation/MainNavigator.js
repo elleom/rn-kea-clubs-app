@@ -12,14 +12,14 @@ import {createBottomTabNavigator} from 'react-navigation-tabs';
 
 
 //screens
-import ClubsScreen from '../screens/ClubsScreen'
-import DiscoveryScreen from "../screens/DiscoveryScreen";
-import MessagesScreen from "../screens/MessagesScreen";
-import MenuScreen from "../screens/MenuScreen";
+import ClubsScreen from '../screens/Clubs/ClubsScreen'
+import DiscoveryScreen from "../screens/Clubs/DiscoveryScreen";
+import MessagesScreen from "../screens/Clubs/MessagesScreen";
+import MenuScreen from "../screens/User/MenuScreen";
 
 import ClubEventsScreen from "../screens/User/UserEventsScreen";
-import EventDetailsScreen from "../screens/EventDetailsScreen";
-import ChatMessagesScreen from '../screens/ChatMessagesScreen';
+import EventDetailsScreen from "../screens/Clubs/EventDetailsScreen";
+import ChatMessagesScreen from '../screens/Clubs/ChatMessagesScreen';
 
 
 //own imports

@@ -8,14 +8,14 @@ import {
   Image,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { addToTest, addToChats } from "./../store/ChatActions";
+import { addToTest, addToChats } from "../../store/ChatActions";
 
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 //own imports
-import Colors from "../constants/Colors";
-import CustomHeaderButton from "../components/CustomHeaderButton";
-import ChatMessage from "../components/ChatMessage";
+import Colors from "../../constants/Colors";
+import CustomHeaderButton from "../../components/CustomHeaderButton";
+import ChatMessage from "../../components/ChatMessage";
 
 const ChatMessagesScreen = (props) => {
   const dispatch = useDispatch();
@@ -68,7 +68,7 @@ const ChatMessagesScreen = (props) => {
           renderItem={(itemData) => (
             <ChatMessage
               chatmessage={itemData.item}
-              img={require("./../assets/ac99082f65d5c636e14e70785817899e.png")}
+              img={require("../../assets/ac99082f65d5c636e14e70785817899e.png")}
               
               ></ChatMessage>
           )}
@@ -79,7 +79,7 @@ const ChatMessagesScreen = (props) => {
       <View style={styles.inputView}>
         <Image
           style={styles.tinyLogo}
-          source={require("./../assets/6d38ab105ed32e0c25e4f82e1e9ccd2a.png")}
+          source={require("../../assets/6d38ab105ed32e0c25e4f82e1e9ccd2a.png")}
         />
 
         <TextInput

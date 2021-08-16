@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image, ScrollView, TouchableOpacity} from 'react-native'
-import Colors from "../constants/Colors";
-import {EVENTS} from "../data/dummy-data";
+import Colors from "../../constants/Colors";
+import {EVENTS} from "../../data/dummy-data";
 import {Ionicons} from "@expo/vector-icons";
 import OptionsMenu from "react-native-option-menu";
 import {useSelector} from "react-redux";
@@ -15,7 +15,7 @@ const EventDetailsScreen = props => {
     const selectedEvent = useSelector(
         state => state.events.availableEvents.find(event => event.id === eventId)
     )
-    const MoreIcon = require("../assets/icon.png");
+    const MoreIcon = require("../../assets/icon.png");
 
     const [attendanceStatus, setAttendanceStatus] = useState('???');
     const [attendees, setAttendees] = useState(0);

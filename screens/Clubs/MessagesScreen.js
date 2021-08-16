@@ -2,13 +2,13 @@ import React, {useCallback, useEffect, useState} from "react";
 import {View, FlatList, StyleSheet, Button, Text} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import * as chatActions from "./../store/ChatActions";
+import * as chatActions from "../../store/ChatActions";
 
 //own imports
-import ChatRoom from "./../components/ChatRoom";
-import CustomHeaderButton from "../components/CustomHeaderButton";
-import Colors from "../constants/Colors";
-import {CHATROOM} from "../data/dummy-data";
+import ChatRoom from "../../components/ChatRoom";
+import CustomHeaderButton from "../../components/CustomHeaderButton";
+import Colors from "../../constants/Colors";
+import {CHATROOM} from "../../data/dummy-data";
 
 
 

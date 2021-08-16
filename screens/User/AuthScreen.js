@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 import {ScrollView, TextInput, View, StyleSheet, Button, KeyboardAvoidingView, Text, Image} from "react-native";
 import Card from "../../components/UI/Card";
 import Colors from "../../constants/Colors";
+import {HeaderButtons, Item} from "react-navigation-header-buttons";
+import CustomHeaderButton from "../../components/CustomHeaderButton";
+import ClubsScreen from "../Clubs/ClubsScreen";
 
 const AuthScreen = props => {
     const [email, setEmail] = useState('');
@@ -11,10 +14,10 @@ const AuthScreen = props => {
             <KeyboardAvoidingView keyboardVerticalOffset={50}>
                 <Card style={styles.authContainer}>
                     <Image source={{uri: 'https://kea.dk/images/DA/Presse/Downloads/KEA_logo_DK_Web.jpg'}}
-                           style={{width: 200, height: 75}} />
+                           style={{width: 200, height: 75}}/>
                     <ScrollView>
                         <View style={styles.inputContainer}>
-                            <Text >Email</Text>
+                            <Text>Email</Text>
                             <TextInput
                                 value={email}
                                 onChangeText={text => setEmail(text)}
@@ -42,6 +45,12 @@ const AuthScreen = props => {
             </KeyboardAvoidingView>
         </View>
     )
+}
+
+AuthScreen.navigationOptions = navData => {
+    return {
+        headerTitle: 'Welcome!',
+    }
 }
 
 const styles = StyleSheet.create({

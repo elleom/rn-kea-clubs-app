@@ -30,7 +30,7 @@ import AddEditEventScreen from "../screens/User/AddEditEventScreen";
 import AuthScreen from "../screens/User/AuthScreen";
 
 
-const defaultStackNavOptions = {
+const defaultNavOptions = {
     headerStyle: {
         backgroundColor: Platform.OS === 'android' ? Colors.accentColor : '' //if none described then default
     },
@@ -45,7 +45,7 @@ const ClubsStackNavigator = createStackNavigator({
 }, {
 
     //points to the nav option stored above,
-    defaultNavigationOptions: defaultStackNavOptions
+    defaultNavigationOptions: defaultNavOptions
 });
 
 const UserStackNavigator = createStackNavigator({
@@ -61,14 +61,14 @@ const UserStackNavigator = createStackNavigator({
             />
     },
     //points to the nav option stored above,
-    defaultNavigationOptions: defaultStackNavOptions
+    defaultNavigationOptions: defaultNavOptions
 });
 
 const MessagesStackNavigator = createStackNavigator({
     Messages: MessagesScreen,
     ChatMessages: ChatMessagesScreen
 }, {
-    defaultNavigationOptions: defaultStackNavOptions
+    defaultNavigationOptions: defaultNavOptions
 });
 
 const tabScreenConfig = {
@@ -164,7 +164,7 @@ const MainDrawerNavigator = createDrawerNavigator(
 
 const AuthNavigator = createStackNavigator({
     Login: AuthScreen
-})
+}, {defaultNavigationOptions: defaultNavOptions })
 
 const MainNavigator = createSwitchNavigator({
     Auth: AuthNavigator,

@@ -1,6 +1,16 @@
-import {EVENTS} from "../../data/dummy-data";
 import {CREATE_EVENT, SET_EVENTS, UPDATE_EVENT} from "../actions/EventsActions";
 import Event from "../../models/Event";
+
+/**
+ * reducer - a function that takes a current state value and an
+ * action object describing "what happened", and returns a new state value.
+ * A reducer's function signature is: (state, action) => newState
+ *
+ * The Redux state should contain only plain JS objects, arrays, and primitives.
+ * The root state value is usually an object.  It's important that you should
+ * not mutate the state object, but return a new object if the state changes.
+ *
+ */
 
 const initialState = {
     availableEvents: [], //EVENTS, //holds all events

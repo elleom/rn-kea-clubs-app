@@ -2,7 +2,6 @@ import {StyleSheet, Text, View} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import * as Font from 'expo-font';
 import AppLoading from "expo-app-loading";
-import FirstScreen from "./screens/FirstScreen";
 import {Provider} from "react-redux";
 import ChatReducer from "./store/reducers/ChatReducer";
 import {combineReducers, createStore, applyMiddleware, compose} from "redux";
@@ -10,6 +9,7 @@ import ReduxThunk from "redux-thunk";
 import auth from '@react-native-firebase/auth';
 import {LogBox} from 'react-native';
 import EventsReducer from "./store/reducers/EventsReducer";
+import MainNavigator from "./navigation/MainNavigator";
 
 LogBox.ignoreLogs(['Setting a timer']);
 
@@ -81,7 +81,7 @@ export default function App() {
     return (
 
         <Provider store={store}>
-            <FirstScreen/>
+            <MainNavigator/>
         </Provider>
     );
 }

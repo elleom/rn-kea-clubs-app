@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {View, StyleSheet, FlatList} from 'react-native'
+import {View, StyleSheet, FlatList, ActivityIndicator, Text} from 'react-native'
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import CustomHeaderButton from "../../components/CustomHeaderButton";
 import Colors from "../../constants/Colors";
@@ -35,7 +35,6 @@ const UserEventScreen = props => {
         }); //returns a promise
     }, [dispatch, loadEvents]);
 
-
     const renderEventItem = eventItemData => {
 
         return (
@@ -62,7 +61,21 @@ const UserEventScreen = props => {
         )
     }
 
+    if (isLoading) {
+        return (
+            <View style={styles.centered}>
+                <ActivityIndicator size="large" color={Colors.primary}/>
+            </View>
+        );
+    }
 
+    if (!isLoading && events.length === 0) {
+        return (
+            <View style={styles.centered}>
+                <Text>No events found. Maybe start adding some!</Text>
+            </View>
+        );
+    }
     return (
         <View style={styles.screen}>
             <FlatList
@@ -106,6 +119,11 @@ UserEventScreen.navigationOptions = navData => {
 const styles = StyleSheet.create({
         text: {
             marginTop: 50,
+            alignItems: 'center'
+        },
+        centered: {
+            flex: 1,
+            justifyContent: 'center',
             alignItems: 'center'
         }
     }

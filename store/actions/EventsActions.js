@@ -71,7 +71,7 @@ export const createEvent = (userId, type, title, description, imageUrl, startDat
                         type,
                         title,
                         description,
-                        imageUrl: imageUrl,
+                        imageUrl,
                         startDate,
                         endDate,
                         location,
@@ -80,8 +80,8 @@ export const createEvent = (userId, type, title, description, imageUrl, startDat
                 )
             })
 
+        //responseData.name will be the ID
         const responseData = await response.json();
-        console.log(responseData)
 
         //this will only dispatch once the previous is done
         dispatch({
@@ -90,7 +90,7 @@ export const createEvent = (userId, type, title, description, imageUrl, startDat
                 eventData: {
                     id: responseData.name, //use as identifier in the rt-db
                     userId: '1',
-                    type: 'event',
+                    type:  type,
                     title: title,
                     description: description,
                     imageUrl: imageUrl,

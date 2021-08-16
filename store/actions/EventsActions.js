@@ -5,7 +5,9 @@ export const CREATE_EVENT = 'CREATE_EVENT';
 export const SET_EVENTS = 'SET_EVENTS';
 
 export const fetchEvents = () => {
-    return async dispatch => {
+    return async (dispatch, getState) => {
+
+        const userId = getState().auth.userId;
 
         const response = await fetch('https://rn-kea-app-default-rtdb.firebaseio.com/events.json', {
             method: 'GET' //default
@@ -29,7 +31,8 @@ export const fetchEvents = () => {
         }
         dispatch({
             type: SET_EVENTS,
-            events: loadedEvents
+            events: loadedEvents,
+            userEvents: loadedEvents.filter(event => event.userId === userId)
         })
     }
 }

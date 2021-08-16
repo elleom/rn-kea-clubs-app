@@ -10,7 +10,7 @@ const EventItem = props => {
             <TouchableOpacity onPress={props.onSelect}>
                 <View >
                     <ImageBackground
-                        source={{uri: props.image}}
+                        source={{uri: props.imageUrl}}
                         style={styles.bgImage}>
                         <LinearGradient //insert veneer on top if image => left to right lighter to darker - opacity
                             colors={['rgba(0,0,0,0.05)', 'rgba(7,6,6,0.45)', 'rgba(0,0,0,0.76)']}

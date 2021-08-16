@@ -12,7 +12,6 @@ import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import CustomHeaderButton from "../../components/CustomHeaderButton";
 import Colors from "../../constants/Colors";
 
-import {EVENTS} from "../../data/dummy-data";
 import {Ionicons} from "@expo/vector-icons";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
 import {useDispatch, useSelector} from "react-redux";
@@ -21,30 +20,28 @@ import * as eventActions from '../../store/actions/EventsActions'
 
 const AddEditEventScreen = props => {
 
+    const selectedEventId = props.navigation.getParam('eventId');
+    /*
+    returns an array with the single object, index 0
+     */
+    const dispatch = useDispatch();
+    const editedEvent = useSelector(state => state.events.userEvents.find(event => event.id = selectedEventId))
     /**
      * form state
      * if evenObject is true/defined then loads the date, else generates new initial value
      */
-    const [title, setTitle] = useState(eventObject ? eventObject.title : 'title')
-    const [imageUrl, setImageUrl] = useState(eventObject ? eventObject.image : 'image test')
-    const [type, setType] = useState(eventObject ? eventObject.type : 'Event test')
-    const [description, setDescription] = useState(eventObject ? eventObject.description : 'test')
-    const [location, setLocation] = useState(eventObject ? eventObject.location : 'Somewhere')
-    const [organization, setOrganization] = useState(eventObject ? eventObject.organization : 'KEA Events')
+    const [title, setTitle] = useState(editedEvent ? editedEvent.title : '')
+    const [imageUrl, setImageUrl] = useState(editedEvent ? editedEvent.imageUrl : '')
+    const [type, setType] = useState(editedEvent ? editedEvent.type : 'Event')
+    const [description, setDescription] = useState(editedEvent ? editedEvent.description : '')
+    const [location, setLocation] = useState(editedEvent ? editedEvent.location : '')
+    const [organization, setOrganization] = useState(editedEvent ? editedEvent.organization : '')
     const [eventTimeDetails, setEventTimeDetails] = useState('')
-
-    const eventId = props.navigation.getParam('eventId')
-
-    /*
-    returns an array with the single object, index 0
-     */
-    const editedEvent = useSelector(state => state.events.userEvents.find(event => event.id = eventId))
-    const eventObject = EVENTS.find(event => event.id === eventId);
-    const dispatch = useDispatch();
 
     const submitHandler = useCallback(() => {
         dispatch(
             eventActions.createEvent(
+                '1',
                 type,
                 title,
                 description,
@@ -81,12 +78,12 @@ const AddEditEventScreen = props => {
 
     const showDatepicker = () => {
         showMode('date');
-        console.log('clicked')
+
     };
 
     const showTimepicker = () => {
         showMode('time');
-        console.log('clicked')
+
     };
 
     return (

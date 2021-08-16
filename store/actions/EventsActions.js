@@ -1,3 +1,5 @@
+import Event from '../../models/Event';
+
 export const UPDATE_EVENT = 'UPDATE_EVENT';
 export const CREATE_EVENT = 'CREATE_EVENT';
 export const SET_EVENTS = 'SET_EVENTS';
@@ -10,15 +12,29 @@ export const fetchEvents = () => {
         })
         const responseData = await response.json()
         const loadedEvents = [];
+
         for (const key in responseData) {
-
+            loadedEvents.push(new Event(
+                key,
+                responseData[key].userId,
+                responseData[key].type,
+                responseData[key].title,
+                responseData[key].description,
+                responseData[key].imageUrl,
+                responseData[key].startDate,
+                responseData[key].endDate,
+                responseData[key].location,
+                responseData[key].organization,
+            ))
         }
-
+        dispatch({
+            type: SET_EVENTS,
+            events: loadedEvents
+        })
     }
-
 }
 
-export const updateEvent = (id, type, title, description, image, startDate, endDate, location, organization) => {
+export const updateEvent = (id, type, title, description, imageUrl, startDate, endDate, location, organization) => {
     return {
         type: UPDATE_EVENT,
         eventId: id,
@@ -26,7 +42,7 @@ export const updateEvent = (id, type, title, description, image, startDate, endD
             type: type,
             title: title,
             description: description,
-            image: image,
+            imageUrl: imageUrl,
             startDate: startDate,
             endDate: endDate,
             location: location,
@@ -35,7 +51,7 @@ export const updateEvent = (id, type, title, description, image, startDate, endD
     }
 }
 
-export const createEvent = (type, title, description, image, startDate, endDate, location, organization) => {
+export const createEvent = (userId, type, title, description, imageUrl, startDate, endDate, location, organization) => {
 
     /**
      * redux-thunk syntax manages it
@@ -51,10 +67,11 @@ export const createEvent = (type, title, description, image, startDate, endDate,
                 method: 'POST',
                 headers: {'Content-Type': 'Application/json'},
                 body: JSON.stringify({
+                        userId,
                         type,
                         title,
                         description,
-                        image,
+                        imageUrl,
                         startDate,
                         endDate,
                         location,
@@ -63,8 +80,8 @@ export const createEvent = (type, title, description, image, startDate, endDate,
                 )
             })
 
+        //responseData.name will be the ID
         const responseData = await response.json();
-        console.log(responseData)
 
         //this will only dispatch once the previous is done
         dispatch({
@@ -72,9 +89,11 @@ export const createEvent = (type, title, description, image, startDate, endDate,
                 // pid: id,
                 eventData: {
                     id: responseData.name, //use as identifier in the rt-db
+                    userId: '1',
+                    type:  type,
                     title: title,
                     description: description,
-                    image: image,
+                    imageUrl: imageUrl,
                     startDate: startDate,
                     endDate: endDate,
                     location: location,

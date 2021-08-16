@@ -43,7 +43,7 @@ const AddEditEventScreen = props => {
         try {
             await dispatch(
                 eventActions.createEvent(
-                    '1',
+                    //userID gets injected on the actionGenerator
                     type,
                     title,
                     description,

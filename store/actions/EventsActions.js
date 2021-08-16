@@ -51,7 +51,7 @@ export const updateEvent = (id, type, title, description, imageUrl, startDate, e
     }
 }
 
-export const createEvent = (userId, type, title, description, imageUrl, startDate, endDate, location, organization) => {
+export const createEvent = (type, title, description, imageUrl, startDate, endDate, location, organization) => {
 
     /**
      * redux-thunk syntax manages it
@@ -62,6 +62,7 @@ export const createEvent = (userId, type, title, description, imageUrl, startDat
         //then before dispatch
 
         const token = getState().auth.token;  //auth is the name of the reducer declared on APP
+        const userId = getState().auth.userId;
 
         //save promise into const   OBS: similar to use .then() after the fetch call
         const response = await fetch(`https://rn-kea-app-default-rtdb.firebaseio.com/events.json?auth=${token}`, //REST API, can GET/POST/ => returns a promise

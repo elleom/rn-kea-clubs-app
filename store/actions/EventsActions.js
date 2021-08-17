@@ -38,19 +38,52 @@ export const fetchEvents = () => {
 }
 
 export const updateEvent = (id, type, title, description, imageUrl, startDate, endDate, location, organization) => {
-    return {
-        type: UPDATE_EVENT,
-        eventId: id,
-        eventData: {
-            type: type,
-            title: title,
-            description: description,
-            imageUrl: imageUrl,
-            startDate: startDate,
-            endDate: endDate,
-            location: location,
-            organization: organization
+    return async (dispatch, getState) => {
+        const token = getState().auth.token;
+        const userId = getState().auth.userId;
+        console.log('This is the '+id);
+
+        //save promise into const   OBS: similar to use .then() after the fetch call
+        //uses ` symbol to inject dynamic data to it
+        // no reason to store the response
+        const responseData = await fetch(`https://rn-kea-app-default-rtdb.firebaseio.com/events/${id}.json?auth=${token}`, //REST API, can GET/POST/ => returns a promise
+            {
+                method: 'PATCH', // patch updates the element, puts replaces completely
+                headers: {'Content-Type': 'Application/json'},
+                body: JSON.stringify({
+                        id,
+                        type,
+                        title,
+                        description,
+                        imageUrl,
+                        location,
+                        organization
+                    }
+                )
+            })
+
+        if (!responseData.ok) {
+            throw new Error('Can\'t update!');
         }
+
+        console.log(responseData)
+
+        dispatch({
+            type: UPDATE_EVENT,
+            eventId: id,
+            eventData: {
+                eventId: id,
+                userId: userId,
+                type: type,
+                title: title,
+                description: description,
+                imageUrl: imageUrl,
+                startDate: startDate,
+                endDate: endDate,
+                location: location,
+                organization: organization
+            }
+        })
     }
 }
 
@@ -96,7 +129,7 @@ export const createEvent = (type, title, description, imageUrl, startDate, endDa
                 eventData: {
                     id: responseData.name, //use as identifier in the rt-db
                     userId: '1',
-                    type:  type,
+                    type: type,
                     title: title,
                     description: description,
                     imageUrl: imageUrl,

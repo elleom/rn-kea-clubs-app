@@ -24,9 +24,23 @@ const ClubsScreen = props => {
             await dispatch(eventActions.fetchEvents())
         } catch (err) {
             console.error(err);
+            setError(err);
         }
         setIsRefreshing(false);
     }, [dispatch, setError, setIsLoading])
+
+    useEffect(() => {
+        //https://reactnavigation.org/docs/navigation-prop/
+        const willFocusSub = props.navigation.addListener('willFocus', () => {
+            //this call back func block fires when this event occurs
+            loadEvents(); //need dependencies
+
+            //cleans up when its about to re run or its destroyed
+            return () => {
+                willFocusSub.remove(); //gets rid of the subscription one is unmounted
+            }
+        })
+    }, [loadEvents]);
 
     /*fires when the component loads */
     useEffect(() => {

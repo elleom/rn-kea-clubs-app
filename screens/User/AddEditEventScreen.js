@@ -20,27 +20,57 @@ import * as eventActions from '../../store/actions/EventsActions'
 
 const AddEditEventScreen = props => {
 
-    const selectedEventId = props.navigation.getParam('eventId');
+    // const selectedEventId = props.navigation.getParam('eventId');
+
     /*
     returns an array with the single object, index 0
      */
+
     const dispatch = useDispatch();
-    const editedEvent = useSelector(state => state.events.userEvents.find(event => event.id = selectedEventId))
+    // const editedEvent = useSelector(state => state.events.userEvents.find(event => event.id = selectedEventId))
     /**
      * form state
      * if evenObject is true/defined then loads the date, else generates new initial value
      */
-    const [title, setTitle] = useState(editedEvent ? editedEvent.title : '')
-    const [imageUrl, setImageUrl] = useState(editedEvent ? editedEvent.imageUrl : '')
-    const [type, setType] = useState(editedEvent ? editedEvent.type : 'event') //HC
-    const [description, setDescription] = useState(editedEvent ? editedEvent.description : '')
-    const [location, setLocation] = useState(editedEvent ? editedEvent.location : '')
-    const [organization, setOrganization] = useState(editedEvent ? editedEvent.organization : 'Kea Events') //HC
-    const [eventTimeDetails, setEventTimeDetails] = useState('')
+    // useEffect(() => {
+    //     console.log(selectedEventId);
+    //     console.log(editedEvent);
+    // })
+
+    // const [title, setTitle] = useState(editedEvent ? editedEvent.title : '')
+    // const [imageUrl, setImageUrl] = useState(editedEvent ? editedEvent.imageUrl : '')
+    // const [type, setType] = useState(editedEvent ? editedEvent.type : 'event') //HC
+    // const [description, setDescription] = useState(editedEvent ? editedEvent.description : '')
+    // const [location, setLocation] = useState(editedEvent ? editedEvent.location : '')
+    // const [organization, setOrganization] = useState(editedEvent ? editedEvent.organization : 'Kea Events') //HC
+    // const [eventTimeDetails, setEventTimeDetails] = useState('')
+
+    const [title, setTitle] = useState('')
+    const [imageUrl, setImageUrl] = useState('')
+    const [type, setType] = useState('event') //HC
+    const [description, setDescription] = useState('')
+    const [location, setLocation] = useState('')
+    const [organization, setOrganization] = useState('Kea Events') //HC
 
     const submitHandler = useCallback(async () => {
-
         try {
+            // if (editedEvent) {
+            //     console.warn('updating')
+            //     await dispatch(
+            //     eventActions.updateEvent(
+            //         selectedEventId,
+            //         type,
+            //         title,
+            //         description,
+            //         imageUrl,
+            //         new Date().toString(), //HC
+            //         new Date().toString(), //HC
+            //         location,
+            //         organization)
+            //     )
+            //
+            // } else {
+            console.warn('creating')
             await dispatch(
                 eventActions.createEvent(
                     //userID gets injected on the actionGenerator
@@ -52,14 +82,14 @@ const AddEditEventScreen = props => {
                     new Date().toString(), //HC
                     location,
                     organization
-                )
-            );
+                ))
+            // };
         } catch (error) {
             console.warn(error.message);
         }
 
 
-        props.navigation.goBack();
+        props.navigation.navigate('Clubs');
         //without the dependencies then the component will reload and have them blanked
     }, [dispatch, title, description, imageUrl, location, organization]);
 
@@ -108,7 +138,9 @@ const AddEditEventScreen = props => {
                         value={title}
                         autoCorrect
                         returnKeyType="next"
-                        onChangeText={text => {setTitle(text)}}
+                        onChangeText={text => {
+                            setTitle(text)
+                        }}
                         required
                     />
                     <Text>Image URL</Text>
@@ -119,7 +151,9 @@ const AddEditEventScreen = props => {
                         errorText="Please enter a valid image url!"
                         keyboardType="default"
                         returnKeyType="next"
-                        onChangeText={text => {setImageUrl(text)}}
+                        onChangeText={text => {
+                            setImageUrl(text)
+                        }}
                         required
                     />
                     <Text>Location</Text>
@@ -130,7 +164,9 @@ const AddEditEventScreen = props => {
                         errorText="Please enter a valid image url!"
                         keyboardType="default"
                         returnKeyType="next"
-                        onChangeText={text => {setLocation(text)}}
+                        onChangeText={text => {
+                            setLocation(text)
+                        }}
                         required
                     />
                     <View style={styles.container}>
@@ -175,7 +211,9 @@ const AddEditEventScreen = props => {
                         returnKeyType='next'
                         multiline
                         numberOfLines={3}
-                        onChangeText={text => {setDescription(text)}}
+                        onChangeText={text => {
+                            setDescription(text)
+                        }}
                         required
                         minLength={5}
                     />
@@ -199,7 +237,9 @@ AddEditEventScreen.navigationOptions = navData => {
          * eventId is passed on as param on
          * if eventId != undefined then header title will change accordingly
          */
-        headerTitle: eventId ? 'Edit Event' : 'Add Event',
+        // headerTitle: eventId ? 'Edit Event' : 'Add Event',
+        headerTitle: 'Add Event',
+
         headerRight: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
             <Item
                 title='Clubs'

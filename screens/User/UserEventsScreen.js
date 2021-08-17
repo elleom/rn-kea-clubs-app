@@ -35,6 +35,10 @@ const UserEventScreen = props => {
         }); //returns a promise
     }, [dispatch, loadEvents]);
 
+    // const editEventHandler = id => {
+    //     props.navigation.navigate('EditEvent', {eventId: id})
+    // }
+
     const renderEventItem = eventItemData => {
 
         return (
@@ -49,13 +53,7 @@ const UserEventScreen = props => {
                 location={eventItemData.item.location}
                 organization={eventItemData.item.organization}
                 onSelect={() => {
-                    props.navigation.navigate({
-                        routeName: 'EditEvent',
-                        params: {
-                            eventId: eventItemData.item.id,
-                            eventName: eventItemData.item.title
-                        }
-                    })
+                    // editEventHandler(eventItemData.item.id)
                 }}
             />
         )

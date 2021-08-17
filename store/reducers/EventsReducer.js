@@ -41,6 +41,35 @@ export default (state = initialState, action) => {
                 availableEvents: action.events,
                 userEvents: action.userEvents
             }
+        case UPDATE_EVENT:
+            const eventIndex = state.userEvents.findIndex(
+                event => event.id === action.eventId
+            );
+            const updatedEvent = new Event(
+                action.eventId,
+                state.eventData[eventIndex].ownerId,
+                state.eventData.type,
+                action.eventData.title,
+                action.eventData.description,
+                action.eventData.imageUrl,
+                action.eventData.startDate,
+                action.eventData.endDate,
+                action.eventData.location,
+                action.eventData.organization
+            );
+            console.log(updatedEvent)
+            const updatedUserEvents = [...state.userEvents];
+            updatedUserEvents[eventIndex] = updatedEvent;
+            const availableEventIndex = state.availableEvents.findIndex(
+                event => event.id === action.eventId
+            );
+            const updatedAvailableEvents = [...state.availableEvents];
+            updatedAvailableEvents[availableEventIndex] = updatedEvent;
+            return {
+                ...state,
+                availableProducts: updatedAvailableEvents,
+                userEvents: updatedUserEvents
+            };
     }
     return state;
 }

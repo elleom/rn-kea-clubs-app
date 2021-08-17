@@ -10,6 +10,7 @@ import auth from '@react-native-firebase/auth';
 import {LogBox} from 'react-native';
 import EventsReducer from "./store/reducers/EventsReducer";
 import MainNavigator from "./navigation/MainNavigator";
+import AuthReducer from "./store/reducers/AuthReducer";
 
 LogBox.ignoreLogs(['Setting a timer']);
 
@@ -28,7 +29,8 @@ const fetchFont = () => {
 
 const rootReducer = combineReducers({
     chat: ChatReducer,
-    events: EventsReducer
+    events: EventsReducer,
+    auth: AuthReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

@@ -9,26 +9,28 @@ import {createStackNavigator} from 'react-navigation-stack';
 import {createDrawerNavigator} from "react-navigation-drawer";
 import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom-tabs";
 import {createBottomTabNavigator} from 'react-navigation-tabs';
+import {createSwitchNavigator} from "react-navigation";
 
 
 //screens
-import ClubsScreen from '../screens/ClubsScreen'
-import DiscoveryScreen from "../screens/DiscoveryScreen";
-import MessagesScreen from "../screens/MessagesScreen";
-import MenuScreen from "../screens/MenuScreen";
+import ClubsScreen from '../screens/Clubs/ClubsScreen'
+import DiscoveryScreen from "../screens/Clubs/DiscoveryScreen";
+import MessagesScreen from "../screens/Clubs/MessagesScreen";
+import MenuScreen from "../screens/User/MenuScreen";
 
 import ClubEventsScreen from "../screens/User/UserEventsScreen";
-import EventDetailsScreen from "../screens/EventDetailsScreen";
-import ChatMessagesScreen from '../screens/ChatMessagesScreen';
+import EventDetailsScreen from "../screens/Clubs/EventDetailsScreen";
+import ChatMessagesScreen from '../screens/Clubs/ChatMessagesScreen';
 
 
 //own imports
 import Colors from "../constants/Colors";
 import UserEventsScreen from "../screens/User/UserEventsScreen";
 import AddEditEventScreen from "../screens/User/AddEditEventScreen";
+import AuthScreen from "../screens/User/AuthScreen";
 
 
-const defaultStackNavOptions = {
+const defaultNavOptions = {
     headerStyle: {
         backgroundColor: Platform.OS === 'android' ? Colors.accentColor : '' //if none described then default
     },
@@ -43,7 +45,7 @@ const ClubsStackNavigator = createStackNavigator({
 }, {
 
     //points to the nav option stored above,
-    defaultNavigationOptions: defaultStackNavOptions
+    defaultNavigationOptions: defaultNavOptions
 });
 
 const UserStackNavigator = createStackNavigator({
@@ -59,14 +61,14 @@ const UserStackNavigator = createStackNavigator({
             />
     },
     //points to the nav option stored above,
-    defaultNavigationOptions: defaultStackNavOptions
+    defaultNavigationOptions: defaultNavOptions
 });
 
 const MessagesStackNavigator = createStackNavigator({
     Messages: MessagesScreen,
     ChatMessages: ChatMessagesScreen
 }, {
-    defaultNavigationOptions: defaultStackNavOptions
+    defaultNavigationOptions: defaultNavOptions
 });
 
 const tabScreenConfig = {
@@ -160,5 +162,13 @@ const MainDrawerNavigator = createDrawerNavigator(
     }
 )
 
+const AuthNavigator = createStackNavigator({
+    Login: AuthScreen
+}, {defaultNavigationOptions: defaultNavOptions })
 
-export default createAppContainer(MainDrawerNavigator); //nested navigators pattern
+const MainNavigator = createSwitchNavigator({
+    Auth: AuthNavigator,
+    Clubs: MainDrawerNavigator
+})
+
+export default createAppContainer(MainNavigator); //nested navigators pattern

@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "rn-kea-clubs-app",
+    "name": "Kea Clubs",
     "slug": "rn-kea-clubs-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/ico-small.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ea4d44"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

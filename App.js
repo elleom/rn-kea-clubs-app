@@ -13,6 +13,7 @@ import MainNavigator from "./navigation/MainNavigator";
 import AuthReducer from "./store/reducers/AuthReducer";
 
 LogBox.ignoreLogs(['Setting a timer']);
+LogBox.ignoreAllLogs(true);
 
 
 const fetchFont = () => {

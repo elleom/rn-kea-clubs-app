@@ -5,30 +5,40 @@ export const CREATE_EVENT = 'CREATE_EVENT';
 export const SET_EVENTS = 'SET_EVENTS';
 
 export const fetchEvents = () => {
+
+    const loadedEvents = [];
+
     return async (dispatch, getState) => {
 
         const userId = getState().auth.userId;
 
         const response = await fetch('https://rn-kea-app-default-rtdb.firebaseio.com/events.json', {
+        // const response = await fetch('http://10.0.2.2:8080/api/events/', {
             method: 'GET' //default
-        })
-        const responseData = await response.json()
-        const loadedEvents = [];
+        }).then(res => res.json())
+            .then((responseData) => {
+                for (const key in responseData) {
+                    console.log(key)
+                    console.log(responseData[key])
 
-        for (const key in responseData) {
-            loadedEvents.push(new Event(
-                key,
-                responseData[key].userId,
-                responseData[key].type,
-                responseData[key].title,
-                responseData[key].description,
-                responseData[key].imageUrl,
-                responseData[key].startDate,
-                responseData[key].endDate,
-                responseData[key].location,
-                responseData[key].organization,
-            ))
-        }
+                    loadedEvents.push(new Event(
+                        responseData[key].id,
+                        responseData[key].userId,
+                        responseData[key].type,
+                        responseData[key].title,
+                        responseData[key].description,
+                        responseData[key].imageUrl,
+                        responseData[key].startDate,
+                        responseData[key].endDate,
+                        responseData[key].location,
+                        // responseData[key].organization,
+                    ))
+                }
+
+
+            });
+        // const responseData = await response.json()
+
         dispatch({
             type: SET_EVENTS,
             events: loadedEvents,

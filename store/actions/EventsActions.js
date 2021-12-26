@@ -12,8 +12,8 @@ export const fetchEvents = () => {
 
         const userId = getState().auth.userId;
 
-        // const response = await fetch('https://rn-kea-app-default-rtdb.firebaseio.com/events.json', {
-        const response = await fetch('http://10.0.2.2:8080/api/events/', {
+        const response = await fetch('https://rn-kea-app-default-rtdb.firebaseio.com/events.json', {
+        // const response = await fetch('http://10.0.2.2:8080/api/events/', {
             method: 'GET' //default
         }).then(res => res.json())
             .then((responseData) => {
@@ -25,7 +25,7 @@ export const fetchEvents = () => {
                         responseData[key].id,
                         responseData[key].userId,
                         responseData[key].type,
-                        // responseData[key].title,
+                        responseData[key].title,
                         responseData[key].description,
                         responseData[key].imageUrl,
                         responseData[key].startDate,

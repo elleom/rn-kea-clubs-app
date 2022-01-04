@@ -50,7 +50,7 @@ const AuthScreen = props => {
              */
             props.navigation.navigate('Clubs')
         } catch (err) {
-            setError(err);
+            setError(err.toString());
             setIsLoading(false); //cant be outside cause we might be leaving the screen
         }
 

@@ -28,6 +28,7 @@ import Colors from "../constants/Colors";
 import UserEventsScreen from "../screens/User/UserEventsScreen";
 import AddEditEventScreen from "../screens/User/AddEditEventScreen";
 import AuthScreen from "../screens/User/AuthScreen";
+import UserProfile from "../screens/User/UserProfile";
 
 
 const defaultNavOptions = {
@@ -35,7 +36,8 @@ const defaultNavOptions = {
         backgroundColor: Platform.OS === 'android' ? Colors.accentColor : '' //if none described then default
     },
     headerTitleStyle: {}, headerBackTitleStyle: {},
-    headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor
+    headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor,
+    backgroundColor: '#f5f5f5'
 
 }
 
@@ -71,6 +73,13 @@ const MessagesStackNavigator = createStackNavigator({
     defaultNavigationOptions: defaultNavOptions
 });
 
+const MenuStackNavigator = createStackNavigator({
+    Menu: MenuScreen,
+    Profile: UserProfile
+},{
+    defaultNavigationOptions: defaultNavOptions
+})
+
 const tabScreenConfig = {
     Clubs: {
         screen: ClubsStackNavigator, navigationOptions: {
@@ -101,7 +110,7 @@ const tabScreenConfig = {
         }
     },
     Menu: {
-        screen: MenuScreen, navigationOptions: {
+        screen: MenuStackNavigator, navigationOptions: {
             tabBarIcon: (tabInfo) => {
                 return (<Ionicons name='ios-construct-outline' size={25} color={tabInfo.tintColor}/>)
             },

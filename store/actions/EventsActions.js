@@ -31,7 +31,7 @@ export const fetchEvents = () => {
                         responseData[key].startDate,
                         responseData[key].endDate,
                         responseData[key].location,
-                        // responseData[key].organization,
+                        [responseData[key].organization.id, responseData[key].organization.name]
                     ))
                 }
 
@@ -51,7 +51,7 @@ export const updateEvent = (id, type, title, description, imageUrl, startDate, e
     return async (dispatch, getState) => {
         const token = getState().auth.token;
         const userId = getState().auth.userId;
-        console.log('This is the '+id);
+        console.log('This is the '+ id);
 
         //save promise into const   OBS: similar to use .then() after the fetch call
         //uses ` symbol to inject dynamic data to it
@@ -112,6 +112,7 @@ export const createEvent = (type, title, description, imageUrl, startDate, endDa
 
         //save promise into const   OBS: similar to use .then() after the fetch call
         const response = await fetch(`https://rn-kea-app-default-rtdb.firebaseio.com/events.json?auth=${token}`, //REST API, can GET/POST/ => returns a promise
+        // const response = await fetch(`http://10.0.2.2:8080/api/events/`, //REST API, can GET/POST/ => returns a promise
             {
                 method: 'POST',
                 headers: {'Content-Type': 'Application/json'},

@@ -12,8 +12,19 @@ import CustomHeaderButton from "../../components/CustomHeaderButton";
 import Colors from "../../constants/Colors";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Card from "../../components/UI/Card";
+import * as authActions from '../../store/actions/AuthActions';
+import { useDispatch } from 'react-redux';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const MenuScreen = props => {
+    const dispatch = useDispatch();
+    const userImage = AsyncStorage.getItem('imageUri');
+    let displayImage = 'https://www.fillmurray.com/g/140/100'
+    if (userImage) {
+        console.log('Already set')
+        console.log(userImage)
+        displayImage = userImage;
+    }
     return (
         <View style={styles.text}>
             <Card style={styles.card}>
@@ -67,9 +78,10 @@ const MenuScreen = props => {
             <View style={styles.logOut}>
                 <Icon.Button name="logout"
                              size={50}
-
                              backgroundColor={Colors.accentColor}
                              onPress={() => {
+                                 console.log('Ciao!')
+                                 dispatch(authActions.logout());
                                  props.navigation.navigate({
                                      routeName: 'Auth'
                                  })

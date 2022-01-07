@@ -61,7 +61,7 @@ const ClubsScreen = props => {
                 startDate={eventItemData.item.startDate}
                 endDate={eventItemData.item.endDate}
                 location={eventItemData.item.location}
-                organization={eventItemData.item.organization}
+                organization={eventItemData.item.organization[0]} // 1 for name
                 onSelect={() => {
                     props.navigation.navigate({
                         routeName: 'EventDetails',

@@ -50,7 +50,7 @@ const AddEditEventScreen = props => {
     const [type, setType] = useState('event') //HC
     const [description, setDescription] = useState('')
     const [location, setLocation] = useState('')
-    const [organization, setOrganization] = useState('Kea Events') //HC
+    const [organization, setOrganization] = useState({ id: 19, name: 'Kea Events'}) //HC
 
     const submitHandler = useCallback(async () => {
         try {
@@ -141,7 +141,7 @@ const AddEditEventScreen = props => {
                         onChangeText={text => {
                             setTitle(text)
                         }}
-                        required
+                        // required
                     />
                     <Text>Image URL</Text>
                     <TextInput
@@ -154,7 +154,7 @@ const AddEditEventScreen = props => {
                         onChangeText={text => {
                             setImageUrl(text)
                         }}
-                        required
+                        // required
                     />
                     <Text>Location</Text>
                     <TextInput
@@ -167,7 +167,7 @@ const AddEditEventScreen = props => {
                         onChangeText={text => {
                             setLocation(text)
                         }}
-                        required
+                        // required
                     />
                     <View style={styles.container}>
                         <View style={styles.eventTimeContainer}>
@@ -214,7 +214,7 @@ const AddEditEventScreen = props => {
                         onChangeText={text => {
                             setDescription(text)
                         }}
-                        required
+                        // required
                         minLength={5}
                     />
 

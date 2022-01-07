@@ -29,6 +29,7 @@ import UserEventsScreen from "../screens/User/UserEventsScreen";
 import AddEditEventScreen from "../screens/User/AddEditEventScreen";
 import AuthScreen from "../screens/User/AuthScreen";
 import UserProfile from "../screens/User/UserProfile";
+import StartupScreen from "../screens/User/StartupScreen";
 
 
 const defaultNavOptions = {
@@ -176,6 +177,7 @@ const AuthNavigator = createStackNavigator({
 }, {defaultNavigationOptions: defaultNavOptions })
 
 const MainNavigator = createSwitchNavigator({
+    Startup: StartupScreen,
     Auth: AuthNavigator,
     Clubs: MainDrawerNavigator
 })

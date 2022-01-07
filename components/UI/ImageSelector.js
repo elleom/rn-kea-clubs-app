@@ -3,6 +3,7 @@ import {View, Button, Image, Text, StyleSheet, Alert} from "react-native";
 import Colors from "../../constants/Colors";
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from "expo-permissions";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ImageSelector = props => {
     const [pickedImage, setPickedImage] = useState();
@@ -24,12 +25,14 @@ const ImageSelector = props => {
         }
         const image = await ImagePicker.launchCameraAsync({
             allowsEditing: true,
-            aspect: [16, 9],
-            quality: 0.5
+            aspect: [4, 4],
+            quality: 0.5,
+            mediaTypes: "Images"
             ,
         });
 
         setPickedImage(image.uri);
+        props.onImageTaken(image.uri)
     }
 
     return <View style={styles.imagePicker}>
@@ -40,6 +43,15 @@ const ImageSelector = props => {
             )}
         </View>
         <Button title='Take Image' color={Colors.primary} onPress={onPressHandler}/>
+        <Button title='Save' color={Colors.primary} onPress={() => {
+            if (pickedImage) {
+                console.log(pickedImage);
+                AsyncStorage.setItem('userImage', {imageUri: pickedImage.toString()})
+            }
+
+            props.navData.navigate('Menu')
+        }
+        }/>
     </View>
 }
 

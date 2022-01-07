@@ -29,7 +29,7 @@ export default (state = initialState, action) => {
                 action.eventData.imageUrl,
                 action.eventData.startDate,
                 action.eventData.endDate,
-                action.eventData.description
+                action.eventData.organization
             );
             return {
                 ...state,

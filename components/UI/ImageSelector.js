@@ -12,7 +12,7 @@ const ImageSelector = props => {
     const verifyPermissions = async () => {
         const result = await Permissions.askAsync(Permissions.CAMERA, Permissions.MEDIA_LIBRARY);
         if (result.status !== 'granted') {
-            Alert.alert('Denied', "You need to agree to continue", [{text: 'Okay'}])
+            Alert.alert('Denied', "You need to agree to continue", [{cardContainer: 'Okay'}])
             return false;
         }
         return true;

@@ -21,30 +21,31 @@ const EventDetailsScreen = props => {
     const [attendees, setAttendees] = useState(0);
     const [interestedPeople, setInterestedPeople] = useState(0);
     const interested = () => {
-        if (attendanceStatus === 'GOING'){
-            setAttendees(attendees-1)
+        if (attendanceStatus === 'GOING') {
+            setAttendees(attendees - 1)
 
         }
-        if (attendanceStatus !== 'INTERESTED'){
-            setInterestedPeople(interestedPeople+1);
+        if (attendanceStatus !== 'INTERESTED') {
+            setInterestedPeople(interestedPeople + 1);
         }
         setAttendanceStatus('INTERESTED')
 
     }
     const going = () => {
         if (attendanceStatus !== 'GOING') {
-            setAttendees(attendees+1);
+            setAttendees(attendees + 1);
         }
-        if (attendanceStatus === 'INTERESTED'){
-            setInterestedPeople(interestedPeople-1)
+        if (attendanceStatus === 'INTERESTED') {
+            setInterestedPeople(interestedPeople - 1)
         }
-        setAttendanceStatus('GOING')}
+        setAttendanceStatus('GOING')
+    }
     const notGoing = () => {
         if (attendanceStatus === 'GOING') {
-            setAttendees(attendees-1);
+            setAttendees(attendees - 1);
         }
-        if (attendanceStatus == 'INTERESTED'){
-            setInterestedPeople(interestedPeople-1);
+        if (attendanceStatus == 'INTERESTED') {
+            setInterestedPeople(interestedPeople - 1);
         }
         setAttendanceStatus('NOT GOING')
     }
@@ -73,10 +74,12 @@ const EventDetailsScreen = props => {
                             }</Text>
                         </View>
                     </View>
-                    <View style={styles.locationContainer}>
+                    <TouchableOpacity style={styles.locationContainer} onPress={() => {
+                        props.navigation.navigate('Map');
+                    }}>
                         <Ionicons name="md-location-sharp" size={20} color="black"/>
                         <Text style={styles.detailsText}>{selectedEvent.location}</Text>
-                    </View>
+                    </TouchableOpacity>
                     <View style={styles.clubInfo}>
                         <TouchableOpacity style={styles.placeholderContainer}>
                             <Image style={styles.placeholder}

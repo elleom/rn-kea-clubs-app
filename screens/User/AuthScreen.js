@@ -27,7 +27,7 @@ const AuthScreen = props => {
     useEffect(() => {
         if (error) {
             console.warn('INNN')
-;            Alert.alert('An error occurred', error, [{text: 'OK'}])
+;            Alert.alert('An error occurred', error, [{cardContainer: 'OK'}])
         }
     }, [error])
 

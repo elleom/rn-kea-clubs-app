@@ -30,6 +30,7 @@ import AddEditEventScreen from "../screens/User/AddEditEventScreen";
 import AuthScreen from "../screens/User/AuthScreen";
 import UserProfile from "../screens/User/UserProfile";
 import StartupScreen from "../screens/User/StartupScreen";
+import LocationMap from "../components/UI/LocationMap";
 
 
 const defaultNavOptions = {
@@ -44,7 +45,17 @@ const defaultNavOptions = {
 
 const ClubsStackNavigator = createStackNavigator({
     Clubs: ClubsScreen, // short form, no option specifications
-    EventDetails: EventDetailsScreen
+    EventDetails: EventDetailsScreen,
+    Map: LocationMap
+}, {
+
+    //points to the nav option stored above,
+    defaultNavigationOptions: defaultNavOptions
+});
+
+const DiscoveryStackNavigator = createStackNavigator({
+    Main: DiscoveryScreen, // short form, no option specifications
+
 }, {
 
     //points to the nav option stored above,
@@ -93,7 +104,7 @@ const tabScreenConfig = {
         }
     },
     Discovery: {
-        screen: DiscoveryScreen, navigationOptions: {
+        screen: DiscoveryStackNavigator, navigationOptions: {
             tabBarIcon: (tabInfo) => {
                 return (<Ionicons name='md-earth' size={25} color={tabInfo.tintColor}/>)
             },
